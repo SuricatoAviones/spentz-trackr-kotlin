@@ -65,6 +65,7 @@
     <string name="expense_badge_bcv">BCV</string>
     <string name="expense_badge_paralelo">Paralelo</string>
     <string name="expense_badge_manual">Manual</string>
+    <string name="expense_badge_estimada">Estimada</string>
 
     <!-- Gastos: detalle -->
     <string name="expense_detail_title">Detalle del gasto</string>
@@ -127,7 +128,32 @@
     <!-- Ajustes: catálogos -->
     <string name="settings_open_categories">Categorías</string>
     <string name="settings_open_sources">Orígenes de pago</string>
+    <string name="settings_open_rates">Tasas</string>
     <string name="nav_incomes">Ingresos</string>
+
+    <!-- Tasas (Fase 5) -->
+    <string name="rates_title">Tasas</string>
+    <string name="rates_bcv">BCV</string>
+    <string name="rates_paralelo">Paralelo</string>
+    <string name="rates_manual_badge">Manual</string>
+    <string name="rates_updated_now">Actualizada hace un momento</string>
+    <string name="rates_updated_minutes">Actualizada hace %1$d min</string>
+    <string name="rates_updated_hours">Actualizada hace %1$d h</string>
+    <string name="rates_estimated_notice">Sin tasa de hoy: se muestra la última conocida (estimada).</string>
+    <string name="rates_manual_active">Tasa manual de hoy: %1$s</string>
+    <string name="rates_manual_title">Usar mi tasa de hoy</string>
+    <string name="rates_manual_support">Se guarda como manual del día y gana sobre la tasa de la API en formularios y dashboard.</string>
+    <string name="rates_manual_label">Tasa (Bs por USD)</string>
+    <string name="rates_manual_invalid">Introduce una tasa mayor que 0.</string>
+    <string name="rates_manual_save">Guardar tasa manual</string>
+    <string name="rates_manual_saved">Tasa manual guardada.</string>
+    <string name="rates_sync_now">Actualizar ahora</string>
+    <string name="rates_syncing">Actualizando…</string>
+    <string name="rates_sync_failed">No se pudo actualizar. Se mantiene la última tasa conocida.</string>
+    <string name="rates_history_title">Histórico (30 días)</string>
+    <string name="rates_history_empty">Aún no hay tasas guardadas. Pulsa «Actualizar ahora».</string>
+    <string name="rates_history_remote_unavailable">El histórico vive en el servidor; en modo remoto no se muestra aquí.</string>
+    <string name="rates_error">No se pudieron cargar las tasas.</string>
 
     <!-- Onboarding: bienvenida -->
     <string name="onboarding_welcome_title">Bienvenido a Spentz Trackr</string>

@@ -65,6 +65,7 @@
     <string name="expense_badge_bcv">BCV</string>
     <string name="expense_badge_paralelo">Parallel</string>
     <string name="expense_badge_manual">Manual</string>
+    <string name="expense_badge_estimada">Estimated</string>
 
     <!-- Expenses: detail -->
     <string name="expense_detail_title">Expense detail</string>
@@ -127,7 +128,32 @@
     <!-- Settings: catalogs -->
     <string name="settings_open_categories">Categories</string>
     <string name="settings_open_sources">Payment sources</string>
+    <string name="settings_open_rates">Exchange rates</string>
     <string name="nav_incomes">Income</string>
+
+    <!-- Rates (Phase 5) -->
+    <string name="rates_title">Exchange rates</string>
+    <string name="rates_bcv">BCV</string>
+    <string name="rates_paralelo">Parallel</string>
+    <string name="rates_manual_badge">Manual</string>
+    <string name="rates_updated_now">Updated just now</string>
+    <string name="rates_updated_minutes">Updated %1$d min ago</string>
+    <string name="rates_updated_hours">Updated %1$d h ago</string>
+    <string name="rates_estimated_notice">No rate for today: showing the last known one (estimated).</string>
+    <string name="rates_manual_active">Today\'s manual rate: %1$s</string>
+    <string name="rates_manual_title">Use my rate for today</string>
+    <string name="rates_manual_support">Saved as today\'s manual rate; it wins over the API rate in forms and the dashboard.</string>
+    <string name="rates_manual_label">Rate (Bs per USD)</string>
+    <string name="rates_manual_invalid">Enter a rate greater than 0.</string>
+    <string name="rates_manual_save">Save manual rate</string>
+    <string name="rates_manual_saved">Manual rate saved.</string>
+    <string name="rates_sync_now">Refresh now</string>
+    <string name="rates_syncing">Refreshing…</string>
+    <string name="rates_sync_failed">Couldn\'t refresh. Keeping the last known rate.</string>
+    <string name="rates_history_title">History (30 days)</string>
+    <string name="rates_history_empty">No rates saved yet. Tap “Refresh now”.</string>
+    <string name="rates_history_remote_unavailable">History lives on the server; it isn\'t shown in remote mode.</string>
+    <string name="rates_error">Couldn\'t load exchange rates.</string>
 
     <!-- Onboarding: welcome -->
     <string name="onboarding_welcome_title">Welcome to Spentz Trackr</string>

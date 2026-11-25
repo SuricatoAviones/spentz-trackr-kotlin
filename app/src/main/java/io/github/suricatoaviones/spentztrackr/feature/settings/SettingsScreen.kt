@@ -35,6 +35,7 @@ fun SettingsScreen(
     onConnectServer: () -> Unit,
     onOpenCatalogs: () -> Unit,
     onOpenSources: () -> Unit,
+    onOpenRates: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
@@ -161,6 +162,13 @@ fun SettingsScreen(
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(stringResource(R.string.settings_open_sources))
+            }
+            // Tasas (Fase 5)
+            OutlinedButton(
+                onClick = onOpenRates,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.settings_open_rates))
             }
         }
     }

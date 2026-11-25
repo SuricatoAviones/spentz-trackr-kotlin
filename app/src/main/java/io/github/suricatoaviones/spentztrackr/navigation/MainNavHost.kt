@@ -39,6 +39,7 @@ import io.github.suricatoaviones.spentztrackr.feature.home.HomeScreen
 import io.github.suricatoaviones.spentztrackr.feature.incomes.IncomeDetailScreen
 import io.github.suricatoaviones.spentztrackr.feature.incomes.IncomeFormScreen
 import io.github.suricatoaviones.spentztrackr.feature.incomes.IncomesScreen
+import io.github.suricatoaviones.spentztrackr.feature.rates.RatesScreen
 import io.github.suricatoaviones.spentztrackr.feature.settings.SettingsScreen
 
 /**
@@ -108,6 +109,7 @@ fun MainNavHost(navController: NavHostController = rememberNavController()) {
                     onConnectServer = { navController.navigate(Routes.serverLogin(fromSettings = true)) },
                     onOpenCatalogs = { navController.navigate(Routes.CATEGORIES) },
                     onOpenSources = { navController.navigate(Routes.SOURCES) },
+                    onOpenRates = { navController.navigate(Routes.RATES) },
                 )
             }
 
@@ -213,6 +215,10 @@ fun MainNavHost(navController: NavHostController = rememberNavController()) {
 
             composable(Routes.SOURCES) {
                 SourcesScreen()
+            }
+
+            composable(Routes.RATES) {
+                RatesScreen(onBack = { navController.popBackStack() })
             }
 
             serverLoginDestination(navController)
