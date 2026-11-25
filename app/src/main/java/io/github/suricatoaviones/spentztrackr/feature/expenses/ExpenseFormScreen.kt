@@ -303,15 +303,6 @@ private fun RateField(
 }
 
 @Composable
-private fun badgeText(badge: RateBadge?): String =
-    when (badge) {
-        RateBadge.BCV -> stringResource(R.string.expense_badge_bcv)
-        RateBadge.PARALELO -> stringResource(R.string.expense_badge_paralelo)
-        RateBadge.MANUAL -> stringResource(R.string.expense_badge_manual)
-        null -> ""
-    }
-
-@Composable
 private fun FrozenPreview(uiState: ExpenseFormUiState) {
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(16.dp)) {
