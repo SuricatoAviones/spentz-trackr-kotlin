@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ADR-A11: muchos auto-hospedajes caseros corren en LAN sin TLS. Se permite
+    cleartext hacia cualquier host (la URL la define el usuario en el
+    onboarding) y la UI de conexión advierte cuando la URL es http://.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>
