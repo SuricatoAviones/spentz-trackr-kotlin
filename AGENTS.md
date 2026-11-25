@@ -83,8 +83,12 @@ El bytecode target es Java 17 (compatible con CI y cualquier JDK 17+).
 - **Fase 1 — Onboarding y modos**: ✅ completada (2026-11-25) y en `main` (PR #1).
 - **Fase 2 — Dominio del dinero y datos**: ✅ completada (2026-11-26) y en `main` (PR #2).
 - **Fase 3 — Gastos**: ✅ completada (2026-11-26) y en `main` (PR #3).
-- **Fase 4 — Ingresos y catálogos**: ✅ completada (2026-11-26) en rama
-  `fase/4-ingresos-catalogos` → PR a `main`. CRUD de ingresos (con tasa congelada
-  en Bs), gestión de categorías (con presupuesto, icono/color picker y borrado
-  bloqueado), orígenes de pago, `TrackingSettingsRepository`, pestaña Ingresos.
-- **Siguiente**: Fase 5 — Tasas en rama `fase/5-tasas`.
+- **Fase 4 — Ingresos y catálogos**: ✅ completada (2026-11-26) y en `main` (PR #4).
+  CRUD de ingresos (con tasa congelada en Bs), gestión de categorías (con presupuesto,
+  icono/color picker y borrado bloqueado), orígenes de pago,
+  `TrackingSettingsRepository`, pestaña Ingresos.
+- **Fase 5 — Tasas**: ✅ completada (2026-11-26) en rama `fase/5-tasas` → PR a `main`.
+  `DolarApiClient` + `RatesSyncWorker` (WorkManager con Hilt), refresco perezoso
+  "si > 60 min" no bloqueante, badge Estimada (ADR-002), pantalla de Tasas con
+  override manual, histórico de 30 días y "Actualizar ahora" (local/remoto).
+- **Siguiente**: Fase 6 — Dashboard y ajustes completos en rama `fase/6-dashboard`.

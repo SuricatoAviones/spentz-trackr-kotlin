@@ -37,6 +37,8 @@ data class IncomeFormUiState(
     val currency: CurrencyCode = CurrencyCode.USD,
     val rateText: String = "",
     val rateBadge: RateBadge? = null,
+    val rateProvider: RateProvider? = null,
+    val rateEdited: Boolean = false,
     val categoryId: Long? = null,
     val date: LocalDate? = null,
     val description: String = "",
@@ -71,8 +73,32 @@ class IncomeFormViewModel
         private val _uiState = MutableStateFlow(IncomeFormUiState())
         val uiState: StateFlow<IncomeFormUiState> = _uiState.asStateFlow()
 
+        /** La tasa se refresca sola mientras el usuario no la edite (docs/08 F5). */
+        init {
+            viewModelScope.launch {
+                rates.observeSnapshot().collect { snapshot ->
+                    _uiState.update { state ->
+                        if (state.loading || state.editingId != null || state.rateEdited) {
+                            state
+                        } else {
+                            recompute(
+                                state.copy(
+                                    rateText = snapshot.preferred()?.toCanonicalString().orEmpty(),
+                                    rateBadge = snapshot.badge(),
+                                    rateProvider = snapshot.provider,
+                                ),
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
         fun load(editingId: Long?) {
             if (!_uiState.value.loading) return
+            // Refresco no bloqueante: si la tasa tiene > 60 min, se pide en
+            // segundo plano y el formulario sigue con la cache al instante.
+            viewModelScope.launch { runCatching { rates.refreshIfStale() } }
             viewModelScope.launch {
                 try {
                     val cats = categoriesRepo.observe(CategoryType.INCOME).first()
@@ -93,6 +119,7 @@ class IncomeFormViewModel
                                 date = clock.todayIn(TimeZone.currentSystemDefault()),
                                 rateText = snapshot.preferred()?.toCanonicalString().orEmpty(),
                                 rateBadge = snapshot.badge(),
+                                rateProvider = snapshot.provider,
                             ),
                         )
                     }
@@ -115,7 +142,18 @@ class IncomeFormViewModel
                 )
             }
 
-        fun onRateChange(value: String) = _uiState.update { recompute(it.copy(rateText = value.filterInput(), rateBadge = null)) }
+        fun onRateChange(value: String) =
+            _uiState.update {
+                val text = value.filterInput()
+                recompute(
+                    it.copy(
+                        rateText = text,
+                        rateBadge = null,
+                        rateProvider = if (text.isNotBlank()) RateProvider.CUSTOM else null,
+                        rateEdited = true,
+                    ),
+                )
+            }
 
         fun onCategoryChange(categoryId: Long?) = _uiState.update { it.copy(categoryId = categoryId, categoryError = false) }
 
@@ -152,13 +190,7 @@ class IncomeFormViewModel
                     currency = state.currency,
                     amount = amount,
                     exchangeRate = rate.takeIf { state.currency == CurrencyCode.VES },
-                    rateProvider =
-                        when (state.rateBadge) {
-                            RateBadge.MANUAL -> RateProvider.USER
-                            RateBadge.BCV -> RateProvider.BCV
-                            RateBadge.PARALELO -> RateProvider.PARALELO
-                            null -> rate?.let { RateProvider.CUSTOM }
-                        },
+                    rateProvider = state.rateProvider,
                     description = state.description.trim(),
                     note = state.note.trim().takeIf { text -> text.isNotBlank() },
                     receivedAt = state.date ?: clock.todayIn(TimeZone.currentSystemDefault()),
@@ -212,6 +244,7 @@ class IncomeFormViewModel
                             RateProvider.USER, RateProvider.CUSTOM -> RateBadge.MANUAL
                             null -> null
                         },
+                    rateProvider = income.rateProvider,
                     categoryId = income.categoryId,
                     date = income.receivedAt,
                     description = income.description,
@@ -221,6 +254,7 @@ class IncomeFormViewModel
 
         private fun RateSnapshot.badge(): RateBadge? =
             when {
+                estimated -> RateBadge.ESTIMADA
                 manual != null -> RateBadge.MANUAL
                 bcv != null -> RateBadge.BCV
                 paralelo != null -> RateBadge.PARALELO

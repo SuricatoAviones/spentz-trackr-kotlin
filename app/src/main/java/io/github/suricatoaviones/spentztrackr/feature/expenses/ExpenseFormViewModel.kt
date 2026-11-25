@@ -36,7 +36,7 @@ import kotlinx.datetime.todayIn
 import javax.inject.Inject
 
 /** De dónde viene la tasa precargada (badge en el formulario). */
-enum class RateBadge { BCV, PARALELO, MANUAL }
+enum class RateBadge { BCV, PARALELO, MANUAL, ESTIMADA }
 
 data class ExpenseFormUiState(
     val editingId: Long? = null,
@@ -51,6 +51,10 @@ data class ExpenseFormUiState(
     val commissionEdited: Boolean = false,
     val rateText: String = "",
     val rateBadge: RateBadge? = null,
+    /** Proveedor real de la tasa (se conserva aunque el badge diga Estimada). */
+    val rateProvider: RateProvider? = null,
+    /** true cuando el usuario tocó la tasa: deja de refrescarse sola. */
+    val rateEdited: Boolean = false,
     val categoryId: Long? = null,
     val sourceId: Long? = null,
     val date: LocalDate? = null,
@@ -98,9 +102,36 @@ class ExpenseFormViewModel
 
         private var settings: CommissionSettings? = null
 
+        /**
+         * La tasa puede refrescarse sola (worker o "si > 60 min") mientras el
+         * usuario no haya editado el campo ni esté editando un gasto existente.
+         */
+        init {
+            viewModelScope.launch {
+                rates.observeSnapshot().collect { snapshot ->
+                    _uiState.update { state ->
+                        if (state.loading || state.editingId != null || state.rateEdited) {
+                            state
+                        } else {
+                            recompute(
+                                state.copy(
+                                    rateText = snapshot.preferred()?.toCanonicalString().orEmpty(),
+                                    rateBadge = snapshot.badge(),
+                                    rateProvider = snapshot.provider,
+                                ),
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
         /** Carga catálogos + tasa del día; repuebla si es edición. Idempotente. */
         fun load(editingId: Long?) {
             if (!_uiState.value.loading) return
+            // Refresco no bloqueante (docs/08 F5): si la tasa tiene > 60 min,
+            // se pide en segundo plano; el formulario usa la cache al instante.
+            viewModelScope.launch { runCatching { rates.refreshIfStale() } }
             viewModelScope.launch {
                 try {
                     val cats = categoriesRepo.observe(CategoryType.EXPENSE).first()
@@ -125,6 +156,7 @@ class ExpenseFormViewModel
                                 date = clock.todayIn(TimeZone.currentSystemDefault()),
                                 rateText = snapshot.preferred()?.toCanonicalString().orEmpty(),
                                 rateBadge = snapshot.badge(),
+                                rateProvider = snapshot.provider,
                             ),
                         )
                     }
@@ -168,7 +200,18 @@ class ExpenseFormViewModel
 
         fun onClearCommission() = _uiState.update { recompute(it.copy(commissionText = null, commissionEdited = true)) }
 
-        fun onRateChange(value: String) = _uiState.update { recompute(it.copy(rateText = value.filterInput(), rateBadge = null)) }
+        fun onRateChange(value: String) =
+            _uiState.update {
+                val text = value.filterInput()
+                recompute(
+                    it.copy(
+                        rateText = text,
+                        rateBadge = null,
+                        rateProvider = if (text.isNotBlank()) RateProvider.CUSTOM else null,
+                        rateEdited = true,
+                    ),
+                )
+            }
 
         fun onCategoryChange(categoryId: Long?) = _uiState.update { it.copy(categoryId = categoryId, categoryError = false) }
 
@@ -214,7 +257,7 @@ class ExpenseFormViewModel
                     commission = state.commission.takeIf { state.currency == CurrencyCode.VES },
                     amount = amount,
                     exchangeRate = rate.takeIf { state.currency == CurrencyCode.VES },
-                    rateProvider = state.rateProvider(),
+                    rateProvider = state.rateProvider,
                     description = state.description.trim(),
                     note = state.note.trim().takeIf { text -> text.isNotBlank() },
                     spentAt = state.date ?: clock.todayIn(TimeZone.currentSystemDefault()),
@@ -239,14 +282,6 @@ class ExpenseFormViewModel
         }
 
         // ---------- helpers ----------
-
-        private fun ExpenseFormUiState.rateProvider(): RateProvider? =
-            when (rateBadge) {
-                RateBadge.MANUAL -> RateProvider.USER
-                RateBadge.BCV -> RateProvider.BCV
-                RateBadge.PARALELO -> RateProvider.PARALELO
-                null -> rate?.let { RateProvider.CUSTOM }
-            }
 
         /** Recalcula la comisión solo si el usuario no la ha tocado (ADR-006). */
         private fun autoCommission(state: ExpenseFormUiState): ExpenseFormUiState {
@@ -294,6 +329,7 @@ class ExpenseFormViewModel
                             RateProvider.USER, RateProvider.CUSTOM -> RateBadge.MANUAL
                             null -> null
                         },
+                    rateProvider = expense.rateProvider,
                     categoryId = expense.categoryId,
                     sourceId = expense.paymentSourceId,
                     date = expense.spentAt,
@@ -304,6 +340,7 @@ class ExpenseFormViewModel
 
         private fun RateSnapshot.badge(): RateBadge? =
             when {
+                estimated -> RateBadge.ESTIMADA
                 manual != null -> RateBadge.MANUAL
                 bcv != null -> RateBadge.BCV
                 paralelo != null -> RateBadge.PARALELO
@@ -312,9 +349,6 @@ class ExpenseFormViewModel
 
         private fun String.filterInput(): String = filter { c -> c.isDigit() || c == '.' || c == ',' }.replace(',', '.')
     }
-
-private val ExpenseFormUiState.rate: Rate?
-    get() = rateText.takeIf { it.isNotBlank() }?.let(Rate::parseOrNull)
 
 private val ExpenseFormUiState.commission: Money?
     get() = commissionText?.let(Money::parseOrNull)

@@ -167,16 +167,29 @@ Convención de commits: Conventional Commits (`feat:`, `fix:`, `docs:`, `test:`,
       Ajustes, rutas de categoría (crear/editar).
 - [x] Strings ES/EN completos (ingresos + catálogos + ajustes).
 
-## Fase 5 — Tasas ✅ _pendiente_
+## Fase 5 — Tasas ✅ _completada (2026-11-26, rama `fase/5-tasas`)_
 
-- [ ] `DolarApiClient` (Retrofit aparte, sin auth) contra `ve.dolarapi.com/v1/dolares`;
-      parse de lista `moneda/fuente/promedio` con compatibilidad de formato antiguo.
-- [ ] `RatesSyncWorker` (WorkManager, ~6 h, red no medida) + upsert diario BCV+paralelo.
-- [ ] Refresco "si > 60 min" al abrir formularios en Bs (no bloqueante).
-- [ ] Pantalla Tasas: tarjetas BCV/Paralelo, override manual, histórico 30 días,
-      "Actualizar ahora" (local: dolarapi; remoto: `POST /rates/sync`).
-- [ ] Override manual persistido como `manual/user` del día (gana en formularios).
-- [ ] Test: RatePolicy con datos sembrados; worker con WorkManager test framework.
+> Verificado localmente: `assembleDebug`, `test`, `ktlintCheck`, `lint` y
+> `assembleDebugAndroidTest`. La sincronización se prueba en el repositorio
+> (`LocalRateRepositoryTest`) en lugar del WorkManager test framework: el worker
+> quedó fino (decide modo y delega en `RateRepository.syncNow()`).
+
+- [x] `DolarApiClient` (Retrofit aparte, sin auth) contra `ve.dolarapi.com/v1/dolares`;
+      parse de lista `moneda/fuente/promedio` (`oficial` ⇒ BCV) con fecha de
+      actualización y compatibilidad con el formato antiguo. Interfaz
+      `DolarApiSource` para poder testear sin red.
+- [x] `RatesSyncWorker` (WorkManager, ~6 h, red no medida) + upsert diario BCV+paralelo;
+      `SpentzApplication` es `Configuration.Provider` con `HiltWorkerFactory`.
+- [x] Refresco "si > 60 min" al abrir formularios en Bs (no bloqueante): se lanza en
+      segundo plano y el formulario usa la cache; `observeSnapshot` actualiza la tasa
+      mientras el usuario no la haya editado.
+- [x] Pantalla Tasas: tarjetas BCV/Paralelo con "hace X min", override manual, histórico
+      30 días (local), "Actualizar ahora" (local: dolarapi; remoto: `POST /rates/sync`).
+- [x] Override manual persistido como `manual/user` del día (gana en formularios).
+- [x] Badge **Estimada** en formularios cuando no hay tasa del día (ADR-002) y el
+      proveedor real se conserva al congelar.
+- [x] Tests: `RatePolicyTest` (manual > API > estimada), `LocalRateRepositoryTest`
+      (sync, fallback, refresco perezoso, histórico) y `DolarApiMappingTest`.
 
 ## Fase 6 — Dashboard y ajustes ✅ _pendiente_
 

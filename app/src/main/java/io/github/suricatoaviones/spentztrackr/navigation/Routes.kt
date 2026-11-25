@@ -40,6 +40,9 @@ object Routes {
 
     const val SOURCES = "sources"
 
+    // Tasas (desde Ajustes, Fase 5)
+    const val RATES = "rates"
+
     // Onboarding (Fase 1)
     const val WELCOME = "welcome"
     const val MODE_SELECTION = "mode-selection"
