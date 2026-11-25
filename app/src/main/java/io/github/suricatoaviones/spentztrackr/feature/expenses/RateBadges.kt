@@ -11,5 +11,6 @@ fun badgeText(badge: RateBadge?): String =
         RateBadge.BCV -> stringResource(R.string.expense_badge_bcv)
         RateBadge.PARALELO -> stringResource(R.string.expense_badge_paralelo)
         RateBadge.MANUAL -> stringResource(R.string.expense_badge_manual)
+        RateBadge.ESTIMADA -> stringResource(R.string.expense_badge_estimada)
         null -> ""
     }
