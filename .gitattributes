@@ -1,0 +1,14 @@
+# Normalización de finales de línea
+* text=auto
+gradlew text eol=lf
+*.bat text eol=crlf
+
+# Binarios
+*.jar binary
+*.zip binary
+*.png binary
+*.webp binary
+*.jpeg binary
+*.jpg binary
+*.keystore binary
+*.jks binary
