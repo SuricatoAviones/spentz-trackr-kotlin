@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import io.github.suricatoaviones.spentztrackr.domain.model.AppLanguage
 import io.github.suricatoaviones.spentztrackr.domain.model.AppMode
+import io.github.suricatoaviones.spentztrackr.domain.model.AppSettings
 import io.github.suricatoaviones.spentztrackr.domain.model.AppTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first

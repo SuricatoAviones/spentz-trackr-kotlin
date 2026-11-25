@@ -1,8 +1,4 @@
-package io.github.suricatoaviones.spentztrackr.data.settings
-
-import io.github.suricatoaviones.spentztrackr.domain.model.AppLanguage
-import io.github.suricatoaviones.spentztrackr.domain.model.AppMode
-import io.github.suricatoaviones.spentztrackr.domain.model.AppTheme
+package io.github.suricatoaviones.spentztrackr.domain.model
 
 /**
  * Snapshot de la configuración de la app (DataStore). Solo estado de sesión y

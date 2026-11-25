@@ -9,10 +9,10 @@ import io.github.suricatoaviones.spentztrackr.data.remote.dto.AuthTokenData
 import io.github.suricatoaviones.spentztrackr.data.remote.dto.LoginRequest
 import io.github.suricatoaviones.spentztrackr.data.remote.dto.RegisterRequest
 import io.github.suricatoaviones.spentztrackr.data.remote.dto.UserDto
-import io.github.suricatoaviones.spentztrackr.data.settings.AppSettings
 import io.github.suricatoaviones.spentztrackr.data.settings.SettingsStore
 import io.github.suricatoaviones.spentztrackr.data.token.TokenStore
 import io.github.suricatoaviones.spentztrackr.domain.model.AppMode
+import io.github.suricatoaviones.spentztrackr.domain.model.AppSettings
 import io.github.suricatoaviones.spentztrackr.domain.model.LocalSetup
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow

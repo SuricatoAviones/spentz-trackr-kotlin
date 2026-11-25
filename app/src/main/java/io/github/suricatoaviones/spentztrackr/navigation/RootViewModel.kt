@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.suricatoaviones.spentztrackr.data.session.SessionManager
-import io.github.suricatoaviones.spentztrackr.data.settings.AppSettings
+import io.github.suricatoaviones.spentztrackr.domain.model.AppSettings
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
