@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema base de la ventana: la UI real la pinta Compose (SpentzTheme).
+         Solo define la apariencia del arranque hasta que Compose toma el control. -->
+    <style name="Theme.SpentzTrackr" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>

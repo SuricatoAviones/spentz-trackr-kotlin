@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Spentz Trackr</string>
+    <string name="home_tagline">Control de gastos e ingresos en USD · Bs · USDT</string>
+    <string name="home_phase0_badge">Fase 0 · esqueleto listo</string>
+</resources>
