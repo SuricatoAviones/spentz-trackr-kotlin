@@ -33,6 +33,8 @@ import io.github.suricatoaviones.spentztrackr.domain.model.AppMode
 @Composable
 fun SettingsScreen(
     onConnectServer: () -> Unit,
+    onOpenCatalogs: () -> Unit,
+    onOpenSources: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
@@ -146,6 +148,20 @@ fun SettingsScreen(
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth(),
             )
+
+            // Catálogos (Fase 4)
+            OutlinedButton(
+                onClick = onOpenCatalogs,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.settings_open_categories))
+            }
+            OutlinedButton(
+                onClick = onOpenSources,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.settings_open_sources))
+            }
         }
     }
 }

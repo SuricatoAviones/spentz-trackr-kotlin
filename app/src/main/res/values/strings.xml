@@ -79,6 +79,56 @@
     <string name="expense_detail_delete_error">No se pudo eliminar el gasto. Inténtalo de nuevo.</string>
     <string name="expense_detail_not_found">El gasto no existe o no es tuyo.</string>
 
+    <!-- Ingresos: listado -->
+    <string name="incomes_title">Ingresos</string>
+    <string name="incomes_new">Nuevo ingreso</string>
+    <string name="incomes_filter_open">Filtrar ingresos</string>
+    <string name="incomes_month_total">Total del período</string>
+    <string name="incomes_totals">$%1$s · %2$s USDT</string>
+    <string name="incomes_day_total">$%s</string>
+    <string name="incomes_empty">Aún no hay ingresos</string>
+    <string name="incomes_empty_hint">Registra el primero con el botón +</string>
+    <string name="incomes_error">No se pudieron cargar los ingresos</string>
+    <string name="incomes_filter_month">Mes</string>
+    <string name="incomes_filter_category">Categoría</string>
+
+    <!-- Ingresos: formulario -->
+    <string name="income_form_new">Nuevo ingreso</string>
+    <string name="income_form_edit">Editar ingreso</string>
+    <string name="income_form_amount">Monto</string>
+    <string name="income_form_category">Categoría</string>
+    <string name="income_form_save">Guardar ingreso</string>
+    <string name="income_form_save_error">No se pudo guardar el ingreso. Inténtalo de nuevo.</string>
+
+    <!-- Ingresos: detalle -->
+    <string name="income_detail_title">Detalle del ingreso</string>
+    <string name="income_detail_not_found">El ingreso no existe o no es tuyo.</string>
+    <string name="income_detail_delete_confirm_title">¿Eliminar ingreso?</string>
+    <string name="income_detail_delete_error">No se pudo eliminar el ingreso. Inténtalo de nuevo.</string>
+
+    <!-- Catálogos -->
+    <string name="catalog_categories_title">Categorías</string>
+    <string name="catalog_sources_title">Orígenes de pago</string>
+    <string name="catalog_new">Nuevo</string>
+    <string name="catalog_edit">Editar</string>
+    <string name="catalog_type_expense">Gasto</string>
+    <string name="catalog_type_income">Ingreso</string>
+    <string name="catalog_name">Nombre</string>
+    <string name="catalog_name_required">El nombre no puede estar vacío</string>
+    <string name="catalog_budget_label">Presupuesto mensual (opcional)</string>
+    <string name="catalog_budget">Presupuesto: %s</string>
+    <string name="catalog_save">Guardar</string>
+    <string name="catalog_save_error">No se pudo guardar. Inténtalo de nuevo.</string>
+    <string name="catalog_error">No se pudieron cargar los datos</string>
+    <string name="catalog_delete_blocked">No se puede eliminar: tiene movimientos asociados</string>
+    <string name="catalog_pick_icon">Icono y color…</string>
+    <string name="catalog_picker_title">Icono y color</string>
+
+    <!-- Ajustes: catálogos -->
+    <string name="settings_open_categories">Categorías</string>
+    <string name="settings_open_sources">Orígenes de pago</string>
+    <string name="nav_incomes">Ingresos</string>
+
     <!-- Onboarding: bienvenida -->
     <string name="onboarding_welcome_title">Bienvenido a Spentz Trackr</string>
     <string name="onboarding_welcome_bullet_1">Gastos e ingresos en USD, Bs y USDT</string>

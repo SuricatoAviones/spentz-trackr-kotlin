@@ -79,6 +79,56 @@
     <string name="expense_detail_delete_error">Could not delete the expense. Try again.</string>
     <string name="expense_detail_not_found">The expense doesn\'t exist or isn\'t yours.</string>
 
+    <!-- Ingresos: list -->
+    <string name="incomes_title">Income</string>
+    <string name="incomes_new">New income</string>
+    <string name="incomes_filter_open">Filter income</string>
+    <string name="incomes_month_total">Period total</string>
+    <string name="incomes_totals">$%1$s · %2$s USDT</string>
+    <string name="incomes_day_total">$%s</string>
+    <string name="incomes_empty">No income yet</string>
+    <string name="incomes_empty_hint">Register the first one with the + button</string>
+    <string name="incomes_error">Could not load income</string>
+    <string name="incomes_filter_month">Month</string>
+    <string name="incomes_filter_category">Category</string>
+
+    <!-- Income: form -->
+    <string name="income_form_new">New income</string>
+    <string name="income_form_edit">Edit income</string>
+    <string name="income_form_amount">Amount</string>
+    <string name="income_form_category">Category</string>
+    <string name="income_form_save">Save income</string>
+    <string name="income_form_save_error">Could not save the income. Try again.</string>
+
+    <!-- Income: detail -->
+    <string name="income_detail_title">Income detail</string>
+    <string name="income_detail_not_found">The income doesn\'t exist or isn\'t yours.</string>
+    <string name="income_detail_delete_confirm_title">Delete income?</string>
+    <string name="income_detail_delete_error">Could not delete the income. Try again.</string>
+
+    <!-- Catalogs -->
+    <string name="catalog_categories_title">Categories</string>
+    <string name="catalog_sources_title">Payment sources</string>
+    <string name="catalog_new">New</string>
+    <string name="catalog_edit">Edit</string>
+    <string name="catalog_type_expense">Expense</string>
+    <string name="catalog_type_income">Income</string>
+    <string name="catalog_name">Name</string>
+    <string name="catalog_name_required">Name cannot be empty</string>
+    <string name="catalog_budget_label">Monthly budget (optional)</string>
+    <string name="catalog_budget">Budget: %s</string>
+    <string name="catalog_save">Save</string>
+    <string name="catalog_save_error">Could not save. Try again.</string>
+    <string name="catalog_error">Could not load data</string>
+    <string name="catalog_delete_blocked">Cannot delete: has associated transactions</string>
+    <string name="catalog_pick_icon">Icon and color…</string>
+    <string name="catalog_picker_title">Icon and color</string>
+
+    <!-- Settings: catalogs -->
+    <string name="settings_open_categories">Categories</string>
+    <string name="settings_open_sources">Payment sources</string>
+    <string name="nav_incomes">Income</string>
+
     <!-- Onboarding: welcome -->
     <string name="onboarding_welcome_title">Welcome to Spentz Trackr</string>
     <string name="onboarding_welcome_bullet_1">Expenses and income in USD, Bs and USDT</string>
