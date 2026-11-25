@@ -81,10 +81,11 @@ El bytecode target es Java 17 (compatible con CI y cualquier JDK 17+).
 
 - **Fase 0 — Fundaciones**: ✅ completada (2026-11-25) y en `main`.
 - **Fase 1 — Onboarding y modos**: ✅ completada (2026-11-25) y en `main` (PR #1).
-- **Fase 2 — Dominio del dinero y datos**: ✅ completada (2026-11-26) en rama
-  `fase/2-dominio-datos` → PR a `main`. Núcleo `Money`/`Rate` (BigDecimal, ADR-A03),
-  `ConversionService`/`CommissionCalculator`/`RatePolicy` con tests (paridad con el
-  backend verificada), Room v2 (4 tablas nuevas con FKs/índices), DTOs contra shapes
-  reales + API completa, repositorios con delegación por modo y qualifiers. Verificado:
-  `assembleDebug`, `test` (10 suites), `ktlintCheck`, `lint`, androidTest compilado.
-- **Siguiente**: Fase 3 — Gastos (la pantalla estrella) en rama `fase/3-gastos`.
+- **Fase 2 — Dominio del dinero y datos**: ✅ completada (2026-11-26) y en `main` (PR #2).
+- **Fase 3 — Gastos**: ✅ completada (2026-11-26) en rama `fase/3-gastos` → PR a `main`.
+  Pestaña Gastos con lista agrupada por día + filtros, formulario con comisión
+  precargada editable y tasa con badge, equivalente congelado en vivo (el ejemplo
+  canónico del README pasa en la pantalla y en el UI test), detalle con edición y
+  borrado, FAB en Inicio. Verificado: `assembleDebug`, `test`, `ktlintCheck`, `lint`,
+  androidTest compilado.
+- **Siguiente**: Fase 4 — Ingresos y catálogos en rama `fase/4-ingresos-catalogos`.
