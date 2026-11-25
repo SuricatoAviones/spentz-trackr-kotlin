@@ -106,22 +106,41 @@ Convención de commits: Conventional Commits (`feat:`, `fix:`, `docs:`, `test:`,
 - [x] Tests de integración Room en androidTest (insertar gasto con ítems, FK restrict, cascade
       de ítems, idempotencia de tasas) — compilados, ejecutables en emulador.
 
-## Fase 3 — Gastos ✅ _pendiente_
+## Fase 3 — Gastos ✅ _completada (2026-11-26, rama `fase/3-gastos`)_
 
-- [ ] `ExpensesViewModel`: lista con filtros (mes/categoría/moneda), operaciones CRUD.
-- [ ] Pantalla Lista: agrupada por día, subtotales, estados vacío/carga/error/offline.
-- [ ] `ModalBottomSheet` de filtros.
-- [ ] Pantalla Formulario (la de `06`): monto + moneda segmentada; si Bs → método,
-      comisión precargada editable + "sin comisión", tasa precargada con badge fuente
-      (BCV/Paralelo/Manual/Estimada) y edición; equivalente USD/USDT en vivo; categoría
-      (chips), origen (dropdown), fecha, descripción, nota.
-- [ ] Pantalla Detalle: todos los campos + tasa aplicada + editar/eliminar.
-- [ ] FAB desde Dashboard al formulario.
-- [ ] Remoto: precarga de tasa con `GET /rates` (nunca dolarapi directo en remoto).
-- [ ] UI test Compose: alta de gasto en Bs con comisión → aparece en lista con
-      equivalentes correctos.
-- [ ] Verificación cruzada: mismo input en la web y en la app (local) → mismos
-      `usd_amount`/`usdt_amount` congelados.
+> Verificado localmente: `assembleDebug`, `test`, `ktlintCheck`, `lint` y
+> `assembleDebugAndroidTest` (incluye el UI test de Compose, compilado; su ejecución y
+> la del androidTest de Room requieren emulador: `gradlew connectedDebugAndroidTest`).
+> El ejemplo canónico del README del backend se ve **en vivo** en la pantalla del
+> formulario y está congelado en el UI test: (280 Bs + 14) / 28 = $10.50 / 10.50 USDT.
+
+- [x] `ExpensesViewModel`: lista reactiva desde el repositorio delegador con filtros
+      (mes → `firstDay`/`lastDay` pushdown, categoría, moneda), grupos por día con
+      subtotal congelado, totales del período y estado de error con reintentar.
+- [x] Pantalla Lista (docs/06): filas con categoría/origen, monto original + equivalente
+      USD, tarjeta de totales, estados vacío/carga/error, FAB de alta.
+- [x] `ModalBottomSheet` de filtros: meses (últimos 12 + todos), chips de categoría,
+      moneda segmentada.
+- [x] Formulario: monto grande, moneda segmentada, bloque Bs animado (método, comisión
+      precargada `max(mín, %)` **editable** con "sin comisión", tasa con badge
+      BCV/Paralelo/Manual), equivalente congelado en vivo ("Se registrará como…"),
+      chips de categoría con color, dropdown de origen, DatePicker (validación de fecha
+      no futura delegada al backend), descripción/nota, validaciones en línea.
+- [x] `CommissionSettingsRepository` (nuevo, patrón ADR-A01): local lee `user_prefs`
+      (14.00 Bs / 0.30 %); remoto usa defaults con **deuda técnica anotada** (la API no
+      expone las comisiones del usuario en `auth/me`).
+- [x] Detalle: monto, comisión, "Tasa aplicada: X Bs/USD (fuente)", equivalentes
+      congelados, editar y eliminar con confirmación.
+- [x] Navegación: pestaña Gastos en la barra inferior, rutas de formulario (alta/edición)
+      y detalle, FAB en Inicio (alta rápida).
+- [x] UI test de Compose del happy path (`ExpenseFormScreenTest`): ViewModel con fakes
+      por interfaz (sin Hilt), locale forzado a ES para determinismo, campos con
+      `testTag` estables; valida la comisión precargada (14.00 con piso) y el congelado
+      del ejemplo canónico antes de guardar, y el borrador que llega al repositorio.
+- [ ] **Verificación cruzada manual** (criterio docs/07): mismo input en la web y en la
+      app local → mismos congelados — requiere instancia real del backend corriendo.
+- [ ] Ejecutar `connectedDebugAndroidTest` en emulador (tests de Room + UI test de la
+      F2 y este).
 
 ## Fase 4 — Ingresos y catálogos ✅ _pendiente_
 

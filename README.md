@@ -22,16 +22,16 @@ El modo se puede cambiar después en **Ajustes**.
 
 ## Estado
 
-🚧 **En desarrollo — Fase 2 (dominio del dinero) completada** en la rama
-`fase/2-dominio-datos` (PR a `main`): el corazón del proyecto — `BigDecimal` en
-`Money`/`Rate` (nunca Double), conversión **congelada al escribir** con paridad
-exacta al backend (mismo HALF_UP), comisiones `max(mín, %)`, política de tasas,
-Room v2 con las 7 tablas espejo, cliente Retrofit completo contra la API real y
-repositorios que delegan por modo (`@LocalSource`/`@RemoteSource`), todo con
-tests. Las fases viven en ramas `fase/<n>-<slug>` y llegan a `main` por PR —
-plan en [`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md), tablero en
-[`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md) y flujo en
-[`AGENTS.md`](AGENTS.md).
+🚧 **En desarrollo — Fase 3 (gastos) completada** en la rama
+`fase/3-gastos` (PR a `main`): la app ya **hace cosas de verdad** — pestaña
+Gastos con lista agrupada por día y filtros (mes/categoría/moneda), formulario
+con comisión precargada editable y tasa con badge BCV/Paralelo/Manual,
+**equivalente congelado en vivo** (el ejemplo canónico del backend:
+`(280 Bs + 14) / 28 = $10.50 / 10.50 USDT`), detalle con edición/borrado y
+FAB de alta rápida. Todo sobre el dominio de dinero de la Fase 2, en ambos
+modos. Plan en [`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md),
+tablero en [`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md) y flujo
+en [`AGENTS.md`](AGENTS.md).
 
 | Documento | Descripción |
 |---|---|
