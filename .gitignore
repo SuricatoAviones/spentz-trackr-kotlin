@@ -60,6 +60,13 @@ out/
 reports/
 *.exec
 
+# Skills/agentes locales (tooling, no parte del proyecto)
+.agents/
+.ai/
+.claude/
+.cursor/
+skills-lock.json
+
 # OS
 .DS_Store
 Thumbs.db

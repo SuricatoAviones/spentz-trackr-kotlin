@@ -1,0 +1,23 @@
+# EditorConfig — ktlint y el resto de herramientas leen estas reglas.
+# Nota: no fijamos end_of_line para no pelearnos con autocrlf de Windows.
+
+root = true
+
+[*]
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{kt,kts}]
+indent_size = 4
+max_line_length = 140
+# Jetpack Compose usa PascalCase para los composables (convención oficial de
+# Google: se tratan como "tipos" declarativos). La regla function-naming de
+# ktlint contradice esa convención, así que se desactiva para todo el repo.
+ktlint_standard_function-naming = disabled
+
+[*.{yml,yaml}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
