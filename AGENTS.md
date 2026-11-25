@@ -80,10 +80,11 @@ El bytecode target es Java 17 (compatible con CI y cualquier JDK 17+).
 ## Estado (mantener esta sección al día en cada fase)
 
 - **Fase 0 — Fundaciones**: ✅ completada (2026-11-25) y en `main`.
-- **Fase 1 — Onboarding y modos**: ✅ completada (2026-11-25) en rama
-  `fase/1-onboarding-modos` → PR a `main`. DataStore + token cifrado + Room v1 +
-  cliente Retrofit de auth + onboarding completo (bienvenida → modo → login/setup)
-  + cambio de modo en Ajustes. Verificado: `assembleDebug`, `test`, `ktlintCheck`,
-  `lint`.
-- **Siguiente**: Fase 2 — Dominio del dinero y datos, en rama `fase/2-dominio-datos`
-  (empezar volcando `/api/v1.json` de una instancia real para los DTOs).
+- **Fase 1 — Onboarding y modos**: ✅ completada (2026-11-25) y en `main` (PR #1).
+- **Fase 2 — Dominio del dinero y datos**: ✅ completada (2026-11-26) en rama
+  `fase/2-dominio-datos` → PR a `main`. Núcleo `Money`/`Rate` (BigDecimal, ADR-A03),
+  `ConversionService`/`CommissionCalculator`/`RatePolicy` con tests (paridad con el
+  backend verificada), Room v2 (4 tablas nuevas con FKs/índices), DTOs contra shapes
+  reales + API completa, repositorios con delegación por modo y qualifiers. Verificado:
+  `assembleDebug`, `test` (10 suites), `ktlintCheck`, `lint`, androidTest compilado.
+- **Siguiente**: Fase 3 — Gastos (la pantalla estrella) en rama `fase/3-gastos`.
