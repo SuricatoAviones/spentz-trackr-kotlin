@@ -69,30 +69,42 @@ Convención de commits: Conventional Commits (`feat:`, `fix:`, `docs:`, `test:`,
 - [x] Tests: SettingsStore (Turbine sobre DataStore temporal), ServerUrlNormalizer
       (9 casos), ApiErrorMapper (5 casos con bodies reales del backend).
 
-## Fase 2 — Dominio del dinero y datos ✅ _pendiente_
+## Fase 2 — Dominio del dinero y datos ✅ _completada (2026-11-26, rama `fase/2-dominio-datos`)_
 
-- [ ] **Volcar `/api/v1.json` de una instancia real** y definir DTOs contra la spec
-      (tarea de verificación — anotar divergencias con `05`).
-- [ ] `core/money`: `Money`, `Rate`, `CurrencyCode` (USD/VES/USDT), `PaymentMethod`,
-      `RateProvider`; TypeConverters TEXT canónico; formateo por locale.
-- [ ] `domain/model`: `Expense`, `ExpenseItem`, `Income`, `Category`, `PaymentSource`,
-      `ExchangeRate`, `AppSettings` — puros, sin Android.
-- [ ] `ConversionService.convert(currency, amount, rate)` + variantes con items.
-- [ ] `CommissionCalculator.calculate(amount)` = `max(min, amount × %)`.
-- [ ] `RatePolicy.rateFor(date)`: manual del día → api del día → última conocida
-      (estimada); selección BCV/paralelo.
-- [ ] Room: entidades, `SpentzDatabase`, DAOs con queries de listados/agregación,
-      índices y FKs de `03`.
-- [ ] `remote/dto` + mapeadores ↔ dominio; `remote/api/SpentzApi` completa (CRUD de
-      `05`).
-- [ ] Repositorios delegadores por modo (ADR-A01) para gasto, ingreso, categoría, origen,
-      tasa, settings.
-- [ ] **Tests dominio** (JVM): cada moneda, congelado con items, comisión (piso activo,
-      porcentaje activo, cero explícito), RatePolicy (manual > api > estimada), redondeos
-      HALF_UP 2/4 decimales, rechazo de rate ≤ 0.
-- [ ] Tests Room (androidTest): insertar gasto con items y leerlo; FK restrict de
-      categoría con movimientos.
-- [ ] Tests API (MockWebServer): login, 422 de validación, 401, throttling simulado.
+> Verificado localmente: `assembleDebug`, `test` (10 suites JVM: money/rate, conversión,
+> comisión, política de tasas, mapeo de errores, normalizador de URL, settings, delegación por
+> modo, API con MockWebServer y routes), `ktlintCheck`, `lint` y `assembleDebugAndroidTest`
+> (compilado). El androidTest de Room (gasto+ítems, FK restrict, upsert de tasas) corre con
+> `gradlew connectedDebugAndroidTest` en emulador/dispositivo — pendiente de ejecutar a mano.
+> Hallazgos técnicos (notas en el código y `docs/09`): Room+KSP2 exige primitivas en columnas,
+> así que `Money`/`Rate` y las fechas ISO van como **texto canónico** en las entidades (los
+> value classes viven solo en dominio); `kotlinx.datetime.Clock` ya no existe — es
+> `kotlin.time.Clock` (stdlib desde 0.7); los delegadores usan qualifiers
+> `@LocalSource`/`@RemoteSource` para depender de interfaces y testear con fakes.
+
+- [x] Spec confirmada contra `docs/api/api-documentation.md` + Presenters/FormRequests reales del
+      backend (equivalente al volcado de `/api/v1.json`): envelope, items del presenter y reglas
+      de `StoreExpenseRequest`/`StoreIncomeRequest` (items ≤ 6, tasa > 0, fecha no futura).
+- [x] `core/money`: `Money` (2 dec, HALF_UP como `round()` de PHP), `Rate` (4 dec,
+      estrictamente > 0), `CurrencyCode`/`PaymentMethod`/`RateProvider` +
+      `FlexibleBigDecimalSerializer` (número o string, salida texto canónico) — con tests.
+- [x] `domain/model`: `Expense`(+Draft/Item), `Income`(+Draft), `Category`(+Type/Draft),
+      `PaymentSource`(+Draft), `ExchangeRate`(+RateSource); `AppSettings` movida al dominio.
+- [x] Servicios: `ConversionService` (congela como el backend — ejemplo canónico del README
+      (280+14)/28 = $10.50/10.50 USDT; ítems con su propia tasa; VES sin tasa lanza
+      `MissingRateException`), `CommissionCalculator` (`max(mín, monto × %)`), `RatePolicy`
+      (manual > API BCV > API paralelo > última conocida estimada) — con tests.
+- [x] Room v2: `expenses`/`expense_items`/`incomes`/`exchange_rates` con índices por
+      fecha/categoría/moneda, FKs RESTRICT (categoría/origen) y CASCADE (ítems), DAOs con
+      filtros ISO, upsert idempotente de tasas por índice único (source, provider, rate_date).
+- [x] DTOs y mappers contra shapes verificados + `SpentzApi` completa (CRUD de gastos, ingresos,
+      categorías, orígenes; `rates` GET/PUT/`sync`) + `explicitNulls=false` para PUT parciales —
+      con tests MockWebServer (parse número-o-string, requests como texto canónico).
+- [x] Repositorios con delegación por modo (ADR-A01) para las cinco superficies: congelan en
+      local vía `ConversionService` y delegan al backend en remoto; `EntityInUseException`
+      unifica el FK restrict local con el 422/409 del API — con test de delegación por fakes.
+- [x] Tests de integración Room en androidTest (insertar gasto con ítems, FK restrict, cascade
+      de ítems, idempotencia de tasas) — compilados, ejecutables en emulador.
 
 ## Fase 3 — Gastos ✅ _pendiente_
 

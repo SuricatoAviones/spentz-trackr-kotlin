@@ -24,6 +24,10 @@ object NetworkModule {
         Json {
             ignoreUnknownKeys = true
             coerceInputValues = true
+            // Los requests omiten los campos null (los PUT parciales del
+            // backend validan con `sometimes`); la lectura tolera ambos
+            // formatos de decimal vía FlexibleBigDecimalSerializer.
+            explicitNulls = false
         }
 
     @Provides

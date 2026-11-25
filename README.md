@@ -22,14 +22,16 @@ El modo se puede cambiar después en **Ajustes**.
 
 ## Estado
 
-🚧 **En desarrollo — Fase 1 (onboarding y modos) completada** en la rama
-`fase/1-onboarding-modos` (PR a `main`): primer arranque con elección de modo
-(**conectar a tu servidor** con URL + login/registro contra la API, o **modo local**
-con SQLite), cambio de modo en Ajustes, token Sanctum en almacenamiento cifrado y
-tests de settings/URL/errores. Las fases viven en ramas `fase/<n>-<slug>` y llegan
-a `main` por PR — plan completo en [`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md),
-tablero en [`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md) y flujo operativo
-en [`AGENTS.md`](AGENTS.md).
+🚧 **En desarrollo — Fase 2 (dominio del dinero) completada** en la rama
+`fase/2-dominio-datos` (PR a `main`): el corazón del proyecto — `BigDecimal` en
+`Money`/`Rate` (nunca Double), conversión **congelada al escribir** con paridad
+exacta al backend (mismo HALF_UP), comisiones `max(mín, %)`, política de tasas,
+Room v2 con las 7 tablas espejo, cliente Retrofit completo contra la API real y
+repositorios que delegan por modo (`@LocalSource`/`@RemoteSource`), todo con
+tests. Las fases viven en ramas `fase/<n>-<slug>` y llegan a `main` por PR —
+plan en [`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md), tablero en
+[`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md) y flujo en
+[`AGENTS.md`](AGENTS.md).
 
 | Documento | Descripción |
 |---|---|

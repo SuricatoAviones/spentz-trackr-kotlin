@@ -4,10 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import io.github.suricatoaviones.spentztrackr.domain.model.CategoryType
 
 /**
  * Categoría de gasto/ingreso — espejo de `categories` del backend (docs/03).
- * `type` ∈ {expense, income}; los sets por defecto del backend son de gasto.
+ * `type` separa categorías de gasto e ingreso; el presupuesto (USD) solo
+ * vive en categorías de gasto.
  */
 @Entity(
     tableName = "categories",
@@ -20,9 +22,8 @@ data class CategoryEntity(
     val icon: String,
     /** Color hex "#RRGGBB". */
     val color: String,
-    /** "expense" | "income". */
-    val type: String,
-    /** Presupuesto mensual de la categoría, decimal canónico; null = sin tope. */
+    val type: CategoryType,
+    /** Presupuesto mensual en texto canónico ("100.00"); null = sin tope. */
     val budget: String? = null,
     @ColumnInfo(name = "is_system") val isSystem: Boolean = false,
     @ColumnInfo(name = "created_at") val createdAt: Long,
