@@ -63,6 +63,9 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+    // Worker de tasas con inyección (Fase 5)
+    implementation(libs.androidx.hilt.work)
+    ksp(libs.androidx.hilt.compiler)
 
     // Room (modo local — el esquema llega en la Fase 2)
     implementation(libs.androidx.room.runtime)

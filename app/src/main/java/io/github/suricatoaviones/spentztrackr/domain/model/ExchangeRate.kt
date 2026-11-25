@@ -31,4 +31,6 @@ data class ExchangeRate(
     val provider: RateProvider,
     val rate: Rate,
     val rateDate: LocalDate,
+    /** Epoch ms del último upsert (para "hace X min" en la UI); 0 si no aplica. */
+    val updatedAt: Long = 0L,
 )

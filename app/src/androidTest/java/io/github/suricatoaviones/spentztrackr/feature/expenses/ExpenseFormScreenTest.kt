@@ -19,6 +19,7 @@ import io.github.suricatoaviones.spentztrackr.core.money.Rate
 import io.github.suricatoaviones.spentztrackr.domain.model.Category
 import io.github.suricatoaviones.spentztrackr.domain.model.CategoryDraft
 import io.github.suricatoaviones.spentztrackr.domain.model.CategoryType
+import io.github.suricatoaviones.spentztrackr.domain.model.ExchangeRate
 import io.github.suricatoaviones.spentztrackr.domain.model.ExpenseDraft
 import io.github.suricatoaviones.spentztrackr.domain.model.PaymentSource
 import io.github.suricatoaviones.spentztrackr.domain.model.PaymentSourceDraft
@@ -223,6 +224,12 @@ class ExpenseFormScreenTest {
         override suspend fun snapshot(): RateSnapshot = snapshot
 
         override suspend fun saveManualRate(rate: Rate) = Unit
+
+        override fun observeHistory(days: Int): Flow<List<ExchangeRate>> = flowOf(emptyList())
+
+        override suspend fun syncNow(): Boolean = true
+
+        override suspend fun refreshIfStale(maxAgeMinutes: Int) = Unit
     }
 
     private class FakeCommissionSettingsRepository(
