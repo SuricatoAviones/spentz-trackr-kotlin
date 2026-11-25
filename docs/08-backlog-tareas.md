@@ -3,26 +3,42 @@
 El tablero operativo. Se marca `[x]` al completar y se reordena si la realidad manda.
 Referencia de diseño por fase: `07-plan-de-fases.md`.
 
+**Flujo de trabajo** (detalle en `AGENTS.md`): cada fase se desarrolla en su rama
+`fase/<n>-<slug>`, una tarea ≈ un commit detallado (Conventional Commits), y al
+cerrar la fase se abre un PR a `main` con los checkboxes de esa fase marcados.
+
 Convención de commits: Conventional Commits (`feat:`, `fix:`, `docs:`, `test:`,
 `chore:`), en español o inglés pero consistente.
 
 ---
 
-## Fase 0 — Fundaciones ✅ _pendiente_
+## Fase 0 — Fundaciones ✅ _completada (2026-11-25)_
 
-- [ ] Crear estructura Gradle: `settings.gradle.kts`, `build.gradle.kts` (root),
-      `gradle/libs.versions.toml` (version catalog), wrapper (`gradle-wrapper.properties`).
-- [ ] Módulo `:app` con `build.gradle.kts` + `applicationId
-      io.github.suricatoaviones.spentztrackr` + minSdk 26 + target última.
-- [ ] Dependencias base: Compose BOM, Material 3, Navigation-Compose, Hilt, Room,
-      DataStore, Retrofit + OkHttp + kotlinx-serialization, WorkManager, kotlinx-datetime.
-- [ ] `SpentzApplication` (`@HiltAndroidApp`) + `MainActivity` con tema M3 (claro/oscuro).
-- [ ] Esqueleto de navegación con rutas vacías y `strings.xml` ES + `values-en/`.
-- [ ] ktlint + `.editorconfig` + `.gitignore` Android definitivo (build/, .gradle/,
-      local.properties, .idea/, *.apk…).
-- [ ] GitHub Actions: `android-ci.yml` → `gradlew lint ktlintCheck test` (JVM) y
-      `assembleDebug` en main.
-- [ ] Commits de estructura iniciales + verificar CI verde.
+> Verificado localmente: `assembleDebug` ✔ (APK debug generado), `ktlintCheck` ✔,
+> `lint` + `test` ✔. La acción en GitHub se confirma al hacer push (CI corre en
+> cada push/PR). Nota: Kotlin viene built-in en AGP 9 — no existe el plugin
+> `org.jetbrains.kotlin.android` en este repo (ver `docs/09`).
+
+- [x] Crear estructura Gradle: `settings.gradle.kts`, `build.gradle.kts` (root),
+      `gradle/libs.versions.toml` (version catalog), wrapper
+      (`gradle-wrapper.properties` + scripts, Gradle 9.7.0).
+- [x] Módulo `:app` con `build.gradle.kts` + `applicationId
+      io.github.suricatoaviones.spentztrackr` + minSdk 26 + targetSdk 36
+      (compileSdk 37; plataforma android-37.0 instalada en el SDK local).
+- [x] Dependencias base: Compose BOM 2026.09.00 (Compose 1.12.1 / M3 1.4.0),
+      Navigation-Compose 2.10.2, Hilt 2.60.1 (KSP), Room 2.8.5 (KSP), DataStore
+      1.3.0, Retrofit 3.0.0 + OkHttp 5.5.1 + kotlinx-serialization 1.13.0,
+      WorkManager 2.12.0, kotlinx-datetime 0.8.0.
+- [x] `SpentzApplication` (`@HiltAndroidApp`) + `MainActivity` con tema M3
+      (claro/oscuro) y edge-to-edge.
+- [x] Esqueleto de navegación (`Routes` + `SpentzNavHost`, placeholder de Inicio)
+      y `strings.xml` ES + `values-en/`.
+- [x] ktlint (plugin 14.2.0) + `.editorconfig` (function-naming desactivada por
+      la convención PascalCase de Compose) + `.gitignore` Android definitivo +
+      `.gitattributes`.
+- [x] GitHub Actions: `android-ci.yml` → `gradlew ktlintCheck lint test` en cada
+      push/PR; `assembleDebug` + APK como artefacto en `main`.
+- [x] Commits de estructura por tarea (Conventional Commits).
 
 ## Fase 1 — Onboarding y modos ✅ _pendiente_
 

@@ -22,9 +22,16 @@ El modo se puede cambiar después en **Ajustes**.
 
 ## Estado
 
-📋 **En planificación** — todavía no hay código. Toda la documentación de producto,
-arquitectura, fases y tareas está en [`docs/`](docs/README.md) y se completa antes de
-escribir la primera línea. El índice del plan está en [`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md).
+🚧 **En desarrollo — Fase 0 (fundaciones) completada.** El proyecto ya compila y
+corre: esqueleto Android Studio (AGP 9.3.3 + Kotlin 2.4.21 + Gradle 9.7.0),
+tema Material 3 claro/oscuro, navegación vacía, Hilt cableado y CI en GitHub
+Actions. Sin features de negocio todavía — el primer módulo real (onboarding con
+elección de modo remoto/local) es la Fase 1. Plan completo en
+[`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md) y tablero de tareas en
+[`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md).
+
+Las fases se desarrollan en ramas `fase/<n>-<slug>` y llegan a `main` por PR —
+el flujo operativo está en [`AGENTS.md`](AGENTS.md).
 
 | Documento | Descripción |
 |---|---|
@@ -45,18 +52,16 @@ Resumen rápido — el detalle paso a paso está en
 [`docs/09-entorno-y-herramientas.md`](docs/09-entorno-y-herramientas.md):
 
 1. **Android Studio**: `File → Open…` y selecciona esta carpeta
-   (`spentz-trackr-kotlin`). Espera el *Gradle sync* (hasta que la barra de progreso
-   desaparezca).
+   (`spentz-trackr-kotlin`). Espera el *Gradle sync* (la primera vez descarga
+   dependencias; ya es un proyecto Gradle completo desde la Fase 0).
 2. Ejecuta con ▶ (*Run*) sobre un emulador del **Device Manager** o un teléfono con
-   *Depuración USB* activada.
+   *Depuración USB* activada. Verás el placeholder de Inicio de la Fase 0.
 3. **IntelliJ IDEA** sirve para revisar código y Markdown, pero para **compilar y correr**
    un proyecto Android usa Android Studio (es IntelliJ + las herramientas Android).
 
-> Nota: hasta que se complete la **Fase 0** (ver
-> [`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md)) esta carpeta aún no es un
-> proyecto Gradle: Android Studio la abrirá como carpeta de documentos. El esqueleto
-> Android (Gradle, `app/`, manifest) se crea en la Fase 0 y desde ahí ya se abre y corre
-> con ▶.
+Tu SDK local ya tiene las plataformas `android-36.1` y `android-37.0` instaladas
+(detalle del entorno verificado en
+[`docs/09-entorno-y-herramientas.md`](docs/09-entorno-y-herramientas.md)).
 
 ## Relación con el proyecto web
 

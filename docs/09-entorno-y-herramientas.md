@@ -91,6 +91,25 @@ gradlew connectedAndroidTest # tests de instrumentación (emulador/dispositivo c
 
 (En PowerShell de Windows: `.\gradlew …`.) Los mismos comandos corren en CI.
 
+### Nota AGP 9: Kotlin built-in
+
+AGP 9 compila Kotlin **sin** el plugin `org.jetbrains.kotlin.android` (aplicarlo es
+un error de build). La versión del compilador la fija el KGP del classpath: en este
+repo la suben los plugins `org.jetbrains.kotlin.plugin.compose` y
+`…plugin.serialization` (2.4.21) del version catalog. `jvmTarget` no se toca: hereda
+de `android.compileOptions.targetCompatibility` (Java 17). Referencia:
+[migrate-to-built-in-kotlin](https://developer.android.com/build/migrate-to-built-in-kotlin).
+
+### Entorno local verificado (nov 2026)
+
+- Android Studio **Rabbit 2** (2026.2.2) con **JBR 25** como JDK del build.
+- SDK en `C:\Users\luisa\AppData\Local\Android\Sdk`: plataformas `android-36.1` y
+  `android-37.0` (la 37.0 se instaló manualmente desde
+  `platform-37.0_r02.zip` del repositorio de Google), build-tools 36.1.0/37.0.0.
+- Stack fijado en `gradle/libs.versions.toml`: AGP 9.3.3 · Gradle 9.7.0 · Kotlin
+  2.4.21 · KSP 2.3.14 · Hilt 2.60.1 · Compose BOM 2026.09.00 (Compose 1.12.1,
+  Material 3 1.4.0) · compileSdk 37 · targetSdk 36 · minSdk 26.
+
 ## CI — GitHub Actions
 
 - En cada push/PR: `lint` + `ktlintCheck` + `test` (rápidos, JVM).
