@@ -4,6 +4,7 @@ import androidx.room.withTransaction
 import io.github.suricatoaviones.spentztrackr.data.local.entity.CategoryEntity
 import io.github.suricatoaviones.spentztrackr.data.local.entity.PaymentSourceEntity
 import io.github.suricatoaviones.spentztrackr.data.local.entity.UserPrefsEntity
+import io.github.suricatoaviones.spentztrackr.domain.model.CategoryType
 import io.github.suricatoaviones.spentztrackr.domain.model.LocalSetup
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -30,7 +31,7 @@ class LocalInitializer
                                 name = item.name,
                                 icon = item.icon,
                                 color = item.color,
-                                type = CATEGORY_TYPE_EXPENSE,
+                                type = CategoryType.EXPENSE,
                                 isSystem = true,
                                 createdAt = now,
                                 updatedAt = now,
@@ -62,9 +63,5 @@ class LocalInitializer
                     ),
                 )
             }
-        }
-
-        private companion object {
-            const val CATEGORY_TYPE_EXPENSE = "expense"
         }
     }

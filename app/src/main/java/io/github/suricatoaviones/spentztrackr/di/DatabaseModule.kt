@@ -9,6 +9,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.github.suricatoaviones.spentztrackr.data.local.SpentzDatabase
 import io.github.suricatoaviones.spentztrackr.data.local.dao.CategoryDao
+import io.github.suricatoaviones.spentztrackr.data.local.dao.ExchangeRateDao
+import io.github.suricatoaviones.spentztrackr.data.local.dao.ExpenseDao
+import io.github.suricatoaviones.spentztrackr.data.local.dao.IncomeDao
 import io.github.suricatoaviones.spentztrackr.data.local.dao.PaymentSourceDao
 import io.github.suricatoaviones.spentztrackr.data.local.dao.UserPrefsDao
 import javax.inject.Singleton
@@ -37,4 +40,13 @@ object DatabaseModule {
 
     @Provides
     fun providePaymentSourceDao(database: SpentzDatabase): PaymentSourceDao = database.paymentSourceDao()
+
+    @Provides
+    fun provideExpenseDao(database: SpentzDatabase): ExpenseDao = database.expenseDao()
+
+    @Provides
+    fun provideIncomeDao(database: SpentzDatabase): IncomeDao = database.incomeDao()
+
+    @Provides
+    fun provideExchangeRateDao(database: SpentzDatabase): ExchangeRateDao = database.exchangeRateDao()
 }
