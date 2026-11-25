@@ -62,6 +62,7 @@ dependencies {
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     // Room (modo local — el esquema llega en la Fase 2)
     implementation(libs.androidx.room.runtime)
@@ -81,9 +82,14 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.kotlinx.serialization.json)
 
+    // Token Sanctum en almacenamiento cifrado (ADR-A10)
+    implementation(libs.androidx.security.crypto)
+
     // Fechas (kotlinx-datetime — Fase 2)
     implementation(libs.kotlinx.datetime)
 
     // Tests
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
 }
