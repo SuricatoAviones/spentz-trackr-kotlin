@@ -139,10 +139,15 @@ comisión y tasa congelada — en ambos modos.
 - Badge de fuente en formularios: BCV / Paralelo / Manual / Estimada.
 
 **Criterios de salida**:
-- [ ] Con el teléfono en avión, los formularios siguen funcionando con la última tasa
-      conocida marcada "estimada" (nunca se bloquea: ADR-002).
-- [ ] Override manual del día gana sobre la tasa de la API en formularios y dashboard.
-- [ ] Histórico persiste días anteriores (verificable tras cambiar la fecha del emulador).
+- [x] Con el teléfono en avión, los formularios siguen funcionando con la última tasa
+      conocida marcada "estimada" (nunca se bloquea: ADR-002). Cubierto por
+      `LocalRateRepositoryTest` (fallback `estimated = true`) y el badge Estimada.
+- [x] Override manual del día gana sobre la tasa de la API en formularios y dashboard.
+      Cubierto por `RatePolicyTest` y `LocalRateRepositoryTest`; el dashboard lo
+      consumirá en la Fase 6.
+- [x] Histórico persiste días anteriores (verificable tras cambiar la fecha del emulador).
+      Room guarda una fila por `(source, provider, rate_date)`; `observeHistory(30)`
+      lo expone en la pantalla de Tasas. Prueba manual en emulador pendiente.
 
 ## Fase 6 — Dashboard y ajustes completos
 

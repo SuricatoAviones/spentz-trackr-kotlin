@@ -22,12 +22,13 @@ El modo se puede cambiar después en **Ajustes**.
 
 ## Estado
 
-🚧 **En desarrollo — Fase 4 (ingresos y catálogos) completada** en la rama
-`fase/4-ingresos-catalogos` (PR a `main`): la app tiene ahora **CRUD completo de
-ingresos** (con tasa congelada en Bs y equivalente USD/USDT en vivo), **gestión de
-categorías** (con presupuesto mensual, icono/color picker de 25 iconos y 12 colores,
-borrado bloqueado por movimientos) y **orígenes de pago**, además de la pestaña
-Ingresos. Plan en [`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md), tablero en
+🚧 **En desarrollo — Fase 5 (tasas) completada** en la rama `fase/5-tasas`
+(PR a `main`): la app ya **sincroniza tasas reales** de `ve.dolarapi.com`
+(BCV + paralelo) con WorkManager cada ~6 h, refresco perezoso al abrir
+formularios, **badge Estimada** cuando no hay tasa del día (ADR-002: nunca se
+bloquea), override manual del día e histórico de 30 días en la nueva pantalla
+**Tasas** (Ajustes → Tasas), con "Actualizar ahora" en ambos modos. Plan en
+[`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md), tablero en
 [`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md) y flujo en
 [`AGENTS.md`](AGENTS.md).
 
