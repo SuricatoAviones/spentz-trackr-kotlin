@@ -5,7 +5,79 @@
 
     <!-- Main navigation -->
     <string name="nav_home">Home</string>
+    <string name="nav_expenses">Expenses</string>
     <string name="nav_settings">Settings</string>
+
+    <!-- Common actions -->
+    <string name="action_retry">Retry</string>
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_back">Back</string>
+
+    <!-- Expenses: list -->
+    <string name="expenses_title">Expenses</string>
+    <string name="expenses_new">New expense</string>
+    <string name="expenses_filter_open">Filter expenses</string>
+    <string name="expenses_filter_all">All</string>
+    <string name="expenses_filter_month">Month</string>
+    <string name="expenses_filter_category">Category</string>
+    <string name="expenses_filter_currency">Currency</string>
+    <string name="expenses_month_total">Period total</string>
+    <string name="expenses_totals">$%1$s · %2$s USDT</string>
+    <string name="expenses_day_total">$%s</string>
+    <string name="expenses_empty">No expenses yet</string>
+    <string name="expenses_empty_hint">Register the first one with the + button</string>
+    <string name="expenses_error">Could not load expenses</string>
+
+    <!-- Expenses: form -->
+    <string name="expense_form_new">New expense</string>
+    <string name="expense_form_edit">Edit expense</string>
+    <string name="expense_form_amount">Amount</string>
+    <string name="expense_form_amount_invalid">The amount must be a number greater than 0</string>
+    <string name="expense_form_currency">Currency</string>
+    <string name="expense_form_method">Payment method</string>
+    <string name="expense_form_method_none">No method</string>
+    <string name="expense_form_method_pago_movil">Pago móvil</string>
+    <string name="expense_form_method_transferencia">Transfer</string>
+    <string name="expense_form_commission">Commission</string>
+    <string name="expense_form_commission_clear">No commission</string>
+    <string name="expense_form_commission_hint">Preloaded with max(min, amount × %) — editable</string>
+    <string name="expense_form_rate">Bs/USD rate</string>
+    <string name="expense_form_rate_missing">No rate for today: enter it manually</string>
+    <string name="expense_form_rate_invalid">The rate must be greater than 0</string>
+    <string name="expense_form_preview">It will be registered as</string>
+    <string name="expense_form_preview_line">$%1$s · %2$s USDT</string>
+    <string name="expense_form_preview_pending">The rate is missing for the equivalent</string>
+    <string name="expense_form_category">Category</string>
+    <string name="expense_form_category_required">pick one</string>
+    <string name="expense_form_source">Payment source</string>
+    <string name="expense_form_source_required">pick one</string>
+    <string name="expense_form_date">Date</string>
+    <string name="expense_form_description">Description</string>
+    <string name="expense_form_description_required">Description cannot be empty</string>
+    <string name="expense_form_note">Note (optional)</string>
+    <string name="expense_form_note_detail">Note</string>
+    <string name="expense_form_save">Save expense</string>
+    <string name="expense_form_update">Save changes</string>
+    <string name="expense_form_save_error">Could not save the expense. Try again.</string>
+
+    <!-- Rate badges -->
+    <string name="expense_badge_bcv">BCV</string>
+    <string name="expense_badge_paralelo">Parallel</string>
+    <string name="expense_badge_manual">Manual</string>
+
+    <!-- Expenses: detail -->
+    <string name="expense_detail_title">Expense detail</string>
+    <string name="expense_detail_amount">Amount</string>
+    <string name="expense_detail_commission">Commission</string>
+    <string name="expense_detail_rate">Applied rate: %1$s Bs/USD (%2$s)</string>
+    <string name="expense_detail_frozen">Frozen</string>
+    <string name="expense_detail_edit">Edit</string>
+    <string name="expense_detail_delete">Delete</string>
+    <string name="expense_detail_delete_confirm_title">Delete expense?</string>
+    <string name="expense_detail_delete_confirm_text">This action cannot be undone.</string>
+    <string name="expense_detail_delete_error">Could not delete the expense. Try again.</string>
+    <string name="expense_detail_not_found">The expense doesn\'t exist or isn\'t yours.</string>
 
     <!-- Onboarding: welcome -->
     <string name="onboarding_welcome_title">Welcome to Spentz Trackr</string>
