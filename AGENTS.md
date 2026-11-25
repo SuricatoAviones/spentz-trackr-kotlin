@@ -79,9 +79,11 @@ El bytecode target es Java 17 (compatible con CI y cualquier JDK 17+).
 
 ## Estado (mantener esta sección al día en cada fase)
 
-- **Fase 0 — Fundaciones**: ✅ completada (2026-11-25) sobre `main`. Proyecto
-  Android Studio con AGP 9.3.3 + Kotlin built-in 2.4.21 + Gradle 9.7.0, tema M3,
-  navegación vacía, CI. Verificado: `assembleDebug`, `ktlintCheck`, `lint`,
-  `test`. Checklist y notas en `docs/08-backlog-tareas.md`.
-- **Siguiente**: Fase 1 — Onboarding y modos, en rama `fase/1-onboarding-modos`
-  (ramas por fase desde aquí en adelante, con PR a `main` al cerrar).
+- **Fase 0 — Fundaciones**: ✅ completada (2026-11-25) y en `main`.
+- **Fase 1 — Onboarding y modos**: ✅ completada (2026-11-25) en rama
+  `fase/1-onboarding-modos` → PR a `main`. DataStore + token cifrado + Room v1 +
+  cliente Retrofit de auth + onboarding completo (bienvenida → modo → login/setup)
+  + cambio de modo en Ajustes. Verificado: `assembleDebug`, `test`, `ktlintCheck`,
+  `lint`.
+- **Siguiente**: Fase 2 — Dominio del dinero y datos, en rama `fase/2-dominio-datos`
+  (empezar volcando `/api/v1.json` de una instancia real para los DTOs).

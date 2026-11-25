@@ -1,5 +1,69 @@
 <resources>
     <string name="app_name">Spentz Trackr</string>
     <string name="home_tagline">Control de gastos e ingresos en USD · Bs · USDT</string>
-    <string name="home_phase0_badge">Fase 0 · esqueleto listo</string>
+    <string name="home_phase_badge">v0.1 · en desarrollo</string>
+
+    <!-- Navegación principal -->
+    <string name="nav_home">Inicio</string>
+    <string name="nav_settings">Ajustes</string>
+
+    <!-- Onboarding: bienvenida -->
+    <string name="onboarding_welcome_title">Bienvenido a Spentz Trackr</string>
+    <string name="onboarding_welcome_bullet_1">Gastos e ingresos en USD, Bs y USDT</string>
+    <string name="onboarding_welcome_bullet_2">La tasa se congela al registrar: tus reportes no mienten</string>
+    <string name="onboarding_welcome_bullet_3">Tus datos, donde tú decidas</string>
+    <string name="onboarding_welcome_start">Empezar</string>
+
+    <!-- Onboarding: elección de modo -->
+    <string name="onboarding_mode_title">¿Cómo quieres usar la app?</string>
+    <string name="onboarding_mode_local_title">Solo en este teléfono</string>
+    <string name="onboarding_mode_local_desc">Todo se guarda aquí, en SQLite. La tasa Bs/USD se sincroniza desde dolarapi.com; nada más sale del teléfono.</string>
+    <string name="onboarding_mode_remote_title">Conectar a mi servidor</string>
+    <string name="onboarding_mode_remote_desc">Tus datos en tu instancia de Spentz Trackr. Necesitas la URL donde lo hospedaste y tu cuenta.</string>
+    <string name="onboarding_mode_continue">Continuar</string>
+
+    <!-- Onboarding: login del servidor -->
+    <string name="onboarding_server_title">Conectar a tu servidor</string>
+    <string name="onboarding_server_url_label">URL del servidor</string>
+    <string name="onboarding_server_url_support">Ejemplo: gastos.midominio.com — sin /api/v1, se añade solo.</string>
+    <string name="onboarding_server_email_label">Email</string>
+    <string name="onboarding_server_password_label">Contraseña</string>
+    <string name="onboarding_server_register_toggle">Crear cuenta nueva en este servidor</string>
+    <string name="onboarding_server_name_label">Nombre</string>
+    <string name="onboarding_server_confirm_label">Confirmar contraseña</string>
+    <string name="onboarding_server_connect">Conectar</string>
+    <string name="onboarding_server_register">Registrarme y conectar</string>
+    <string name="onboarding_server_cleartext_warning">Esta URL va sin HTTPS: la conexión no está cifrada (típico en redes locales).</string>
+    <string name="onboarding_error_invalid_url">Escribe una URL válida (ej. gastos.midominio.com).</string>
+    <string name="onboarding_error_network">No se pudo conectar con el servidor. Revisa la URL y tu conexión.</string>
+    <string name="onboarding_error_credentials">Email o contraseña incorrectos.</string>
+    <string name="onboarding_error_not_spentz">Este servidor no parece ser Spentz Trackr. Revisa la URL.</string>
+    <string name="onboarding_error_throttled">Demasiados intentos. Espera un momento y prueba de nuevo.</string>
+    <string name="onboarding_error_suspended">Tu cuenta está suspendida en el servidor.</string>
+    <string name="onboarding_error_generic">No se pudo completar la conexión. Inténtalo de nuevo.</string>
+
+    <!-- Onboarding: setup local -->
+    <string name="onboarding_local_title">Configuración rápida</string>
+    <string name="onboarding_local_currency_label">Moneda de visualización</string>
+    <string name="onboarding_local_tracking_label">¿Qué quieres registrar?</string>
+    <string name="onboarding_local_tracking_expenses">Gastos</string>
+    <string name="onboarding_local_tracking_income">Ingresos</string>
+    <string name="onboarding_local_tracking_both">Ambos</string>
+    <string name="onboarding_local_budget_label">Presupuesto mensual (opcional)</string>
+    <string name="onboarding_local_budget_support">En USD. Puedes cambiarlo luego en Ajustes.</string>
+    <string name="onboarding_local_budget_invalid">El presupuesto debe ser un número (ej. 500 o 500.50).</string>
+    <string name="onboarding_local_start">Empezar a usar Spentz Trackr</string>
+
+    <!-- Ajustes -->
+    <string name="settings_title">Ajustes</string>
+    <string name="settings_mode_local">Modo local — los datos viven en este teléfono</string>
+    <string name="settings_mode_remote">Conectado a %s</string>
+    <string name="settings_mode_remote_user">Sesión: %s</string>
+    <string name="settings_mode_remote_loading">Verificando sesión…</string>
+    <string name="settings_switch_local">Cambiar a modo local</string>
+    <string name="settings_switch_remote">Conectar a un servidor</string>
+    <string name="settings_switch_remote_saved">Volver a %s</string>
+    <string name="settings_logout_remote">Cerrar sesión en el servidor</string>
+    <string name="settings_mode_switch_notice">Los datos de cada modo son independientes: cambiar de modo no copia ni borra nada.</string>
+    <string name="settings_about">Spentz Trackr — cliente Android open source (MIT). Fase 1: onboarding y modos.</string>
 </resources>
