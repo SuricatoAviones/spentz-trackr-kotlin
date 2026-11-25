@@ -142,16 +142,30 @@ Convención de commits: Conventional Commits (`feat:`, `fix:`, `docs:`, `test:`,
 - [ ] Ejecutar `connectedDebugAndroidTest` en emulador (tests de Room + UI test de la
       F2 y este).
 
-## Fase 4 — Ingresos y catálogos ✅ _pendiente_
+## Fase 4 — Ingresos y catálogos ✅ _completada (2026-11-26, rama `fase/4-ingresos-catalogos`)_
 
-- [ ] `IncomesViewModel` + lista + filtros mes/categoría.
-- [ ] Formulario de ingreso (moneda, monto, tasa si Bs, categoría, fecha, descripción).
-- [ ] Detalle + editar/eliminar.
-- [ ] Gestión de Categorías: lista separada gasto/ingreso, crear/editar (nombre, icono,
-      color, tipo, presupuesto), borrar con bloqueo por movimientos.
-- [ ] Gestión de Orígenes: CRUD.
-- [ ] Pestaña Ingresos condicionada a `tracking_type` (ambos modos).
-- [ ] Selector de icono (set fijo Material) y color (paleta fija) reutilizable.
+> Verificado localmente: `assembleDebug`, `test`, `ktlintCheck`, `lint` y
+> `assembleDebugAndroidTest` (todo compilado). El CRUD de ingresos congela su tasa
+> (para los reportes de la Fase 6); el borrado de categorías/orígenes con movimientos
+> está bloqueado por `EntityInUseException` (FK restrict local / 422-409 API).
+
+- [x] `IncomesViewModel` + lista con filtros (mes/categoría/moneda), grupos por día con
+      subtotal congelado, totales del período, estados vacío/carga/error.
+- [x] Formulario de ingreso: moneda, monto, tasa con badge si Bs (sin comisión/método/
+      origen — no existen para ingresos, docs/03), categoría tipo INCOME, DatePicker,
+      descripción, nota, equivalente congelado en vivo.
+- [x] Detalle + editar/eliminar con confirmación.
+- [x] Gestión de **Categorías**: lista por tipo (segmented gasto/ingreso), crear/editar
+      (nombre, icono/color con picker reutilizable, tipo, presupuesto mensual en USD),
+      borrar bloqueado con movimientos (`EntityInUseException` → snackbar).
+- [x] Gestión de **Orígenes de pago**: CRUD en diálogo con icono/color picker.
+- [x] `TrackingSettingsRepository` (patrón ADR-A01): local lee `user_prefs`, remoto lee
+      `auth/me` — la pestaña Ingresos se gobernará por `tracking_type` desde la Fase 6.
+- [x] Selector de icono (set fijo Material, 25 iconos) y color (paleta 12) reutilizable:
+      `CatalogIconPickerDialog` + `CatalogIconBadge`.
+- [x] Navegación: pestaña Ingresos, rutas de form/detalle de ingresos, catálogos desde
+      Ajustes, rutas de categoría (crear/editar).
+- [x] Strings ES/EN completos (ingresos + catálogos + ajustes).
 
 ## Fase 5 — Tasas ✅ _pendiente_
 

@@ -3,20 +3,42 @@ package io.github.suricatoaviones.spentztrackr.navigation
 /**
  * Rutas de Compose Navigation.
  *
- * Fase 3: pestaña Gastos + formulario (crear/editar) y detalle.
- * El formulario se abre sin editing (alta) o con id (edición).
+ * Fase 4: ingresos (lista/form/detalle) y catálogos (categorías/orígenes)
+ * accesibles desde Ajustes.
  */
 object Routes {
+    // Tabs principales
     const val HOME = "home"
+    const val EXPENSES = "expenses"
     const val SETTINGS = "settings"
 
-    const val EXPENSES = "expenses"
+    // Gastos
     const val EXPENSE_FORM = "expense-form?editing={editing}"
     const val EXPENSE_DETAIL = "expense-detail/{id}"
 
     fun expenseForm(editing: Long? = null): String = if (editing == null) "expense-form" else "expense-form?editing=$editing"
 
     fun expenseDetail(id: Long): String = "expense-detail/$id"
+
+    // Ingresos
+    const val INCOMES = "incomes"
+    const val INCOME_FORM = "income-form?editing={editing}"
+    const val INCOME_DETAIL = "income-detail/{id}"
+
+    fun incomeForm(editing: Long? = null): String = if (editing == null) "income-form" else "income-form?editing=$editing"
+
+    fun incomeDetail(id: Long): String = "income-detail/$id"
+
+    // Catálogos (desde Ajustes)
+    const val CATEGORIES = "categories"
+    const val CATEGORY_FORM = "category-form?editing={editing}&type={type}"
+
+    fun categoryForm(
+        editing: Long? = null,
+        type: String = "expense",
+    ): String = if (editing == null) "category-form?type=$type" else "category-form?editing=$editing&type=$type"
+
+    const val SOURCES = "sources"
 
     // Onboarding (Fase 1)
     const val WELCOME = "welcome"
@@ -29,7 +51,8 @@ object Routes {
     /** Nombre del argumento de ruta de [SERVER_LOGIN]. */
     const val ARG_FROM_SETTINGS = "fromSettings"
 
-    /** Argumentos del formulario y el detalle. */
+    /** Argumentos de formularios y detalles. */
     const val ARG_EDITING = "editing"
     const val ARG_EXPENSE_ID = "id"
+    const val ARG_CATEGORY_TYPE = "type"
 }

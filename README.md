@@ -22,16 +22,14 @@ El modo se puede cambiar después en **Ajustes**.
 
 ## Estado
 
-🚧 **En desarrollo — Fase 3 (gastos) completada** en la rama
-`fase/3-gastos` (PR a `main`): la app ya **hace cosas de verdad** — pestaña
-Gastos con lista agrupada por día y filtros (mes/categoría/moneda), formulario
-con comisión precargada editable y tasa con badge BCV/Paralelo/Manual,
-**equivalente congelado en vivo** (el ejemplo canónico del backend:
-`(280 Bs + 14) / 28 = $10.50 / 10.50 USDT`), detalle con edición/borrado y
-FAB de alta rápida. Todo sobre el dominio de dinero de la Fase 2, en ambos
-modos. Plan en [`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md),
-tablero en [`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md) y flujo
-en [`AGENTS.md`](AGENTS.md).
+🚧 **En desarrollo — Fase 4 (ingresos y catálogos) completada** en la rama
+`fase/4-ingresos-catalogos` (PR a `main`): la app tiene ahora **CRUD completo de
+ingresos** (con tasa congelada en Bs y equivalente USD/USDT en vivo), **gestión de
+categorías** (con presupuesto mensual, icono/color picker de 25 iconos y 12 colores,
+borrado bloqueado por movimientos) y **orígenes de pago**, además de la pestaña
+Ingresos. Plan en [`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md), tablero en
+[`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md) y flujo en
+[`AGENTS.md`](AGENTS.md).
 
 | Documento | Descripción |
 |---|---|
