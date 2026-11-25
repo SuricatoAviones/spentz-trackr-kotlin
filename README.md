@@ -22,16 +22,14 @@ El modo se puede cambiar después en **Ajustes**.
 
 ## Estado
 
-🚧 **En desarrollo — Fase 0 (fundaciones) completada.** El proyecto ya compila y
-corre: esqueleto Android Studio (AGP 9.3.3 + Kotlin 2.4.21 + Gradle 9.7.0),
-tema Material 3 claro/oscuro, navegación vacía, Hilt cableado y CI en GitHub
-Actions. Sin features de negocio todavía — el primer módulo real (onboarding con
-elección de modo remoto/local) es la Fase 1. Plan completo en
-[`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md) y tablero de tareas en
-[`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md).
-
-Las fases se desarrollan en ramas `fase/<n>-<slug>` y llegan a `main` por PR —
-el flujo operativo está en [`AGENTS.md`](AGENTS.md).
+🚧 **En desarrollo — Fase 1 (onboarding y modos) completada** en la rama
+`fase/1-onboarding-modos` (PR a `main`): primer arranque con elección de modo
+(**conectar a tu servidor** con URL + login/registro contra la API, o **modo local**
+con SQLite), cambio de modo en Ajustes, token Sanctum en almacenamiento cifrado y
+tests de settings/URL/errores. Las fases viven en ramas `fase/<n>-<slug>` y llegan
+a `main` por PR — plan completo en [`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md),
+tablero en [`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md) y flujo operativo
+en [`AGENTS.md`](AGENTS.md).
 
 | Documento | Descripción |
 |---|---|

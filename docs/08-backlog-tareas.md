@@ -40,22 +40,34 @@ Convención de commits: Conventional Commits (`feat:`, `fix:`, `docs:`, `test:`,
       push/PR; `assembleDebug` + APK como artefacto en `main`.
 - [x] Commits de estructura por tarea (Conventional Commits).
 
-## Fase 1 — Onboarding y modos ✅ _pendiente_
+## Fase 1 — Onboarding y modos ✅ _completada (2026-11-25, rama `fase/1-onboarding-modos`)_
 
-- [ ] `data/settings/AppSettingsStore` (DataStore): todas las claves de `04`.
-- [ ] Token: `TokenStore` sobre EncryptedSharedPreferences (ADR-A10).
-- [ ] Pantalla Bienvenida (una pantalla, tres bullets, botón Empezar).
-- [ ] Pantalla Elección de modo (radio-cards Local/Remoto, copys de `04`).
-- [ ] Pantalla Login servidor: campo URL con normalización + email/contraseña + estados
-      de error (inalcanzable / credenciales / no es spentz-trackr) + toggle registro.
-- [ ] Retrofit: `SpentzApi` mínima (`auth/login`, `auth/register`, `auth/me`) +
-      `AuthInterceptor` + `BaseUrlInterceptor` + parse 422.
-- [ ] Pantalla Setup local: moneda display, tracking_type, presupuesto opcional.
-- [ ] `LocalInitializer`: transacción Room con categorías default (set del
-      `AssignDefaultUserDataAction` del backend), orígenes default, `user_prefs`
-      (comisión 14.00 / 0.30%).
-- [ ] Root de navegación con gating onboarding/mode + cambio de modo en Ajustes (stub).
-- [ ] Tests: store de settings (Turbine), normalización de URL, mapeo de errores HTTP.
+> Verificado localmente: `assembleDebug`, `test` (SettingsStore/UrlNormalizer/ApiErrorMapper
+> + Routes), `ktlintCheck`, `lint`. Shapes confirmados contra el código real del backend:
+> envelope `{success, data, message}`, login 422 `{message, errors}`, userShape de
+> `auth/me`, y los 8+8 defaults de `AssignDefaultUserDataAction`. Notas de entorno:
+> `hiltViewModel` 1.4.0 vive en `androidx.hilt.lifecycle.viewmodel.compose`; el
+> constructor de `MasterKey` está deprecado en security-crypto 1.1.0 (funciona).
+
+- [x] `data/settings/SettingsStore` (DataStore): claves de `docs/04` expuestas como
+      `AppSettings` (onboarding, modo, servidor, tema, idioma) + tests.
+- [x] `data/token/TokenStore` sobre EncryptedSharedPreferences (ADR-A10,
+      security-crypto 1.1.0) + permiso INTERNET y `network_security_config` (ADR-A11).
+- [x] Pantalla Bienvenida (monograma + tres ideas).
+- [x] Pantalla Elección de modo (radio-cards con copys honestos de `docs/04`).
+- [x] Pantalla Login servidor: normalización de URL (`ServerUrlNormalizer`), estados de
+      error específicos, toggle de registro (reglas de Fortify confirmadas), aviso
+      cleartext para `http://`.
+- [x] Retrofit mínimo: `SpentzApi` (login/register/me/logout) + `AuthInterceptor` +
+      `DynamicBaseUrlInterceptor` + `ApiErrorMapper` (422/403/429/HTML-no-spentz).
+- [x] Pantalla Setup local: moneda display, tracking type, presupuesto opcional.
+- [x] `LocalInitializer`: transacción Room idempotente con los 8 categorías + 8 orígenes
+      espejo del backend y `user_prefs` (comisión 14.00 Bs / 0.30 %).
+- [x] Root de navegación con gating (`RootApp`: splash → onboarding | main con barra
+      inferior) + Ajustes con cambio de modo (local ↔ remoto con sesión guardada,
+      `auth/me` en pantalla y logout).
+- [x] Tests: SettingsStore (Turbine sobre DataStore temporal), ServerUrlNormalizer
+      (9 casos), ApiErrorMapper (5 casos con bodies reales del backend).
 
 ## Fase 2 — Dominio del dinero y datos ✅ _pendiente_
 
