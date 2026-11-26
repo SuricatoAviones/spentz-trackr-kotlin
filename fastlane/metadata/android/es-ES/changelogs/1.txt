@@ -1,0 +1,1 @@
+Primera versión pública: onboarding con modos local/remoto, gastos, ingresos, categorías, orígenes de pago, tasas, dashboard y ajustes completos. Bilingüe español/inglés, sin telemetría, MIT.

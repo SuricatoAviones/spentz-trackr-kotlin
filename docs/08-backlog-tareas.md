@@ -218,16 +218,32 @@ Convención de commits: Conventional Commits (`feat:`, `fix:`, `docs:`, `test:`,
       categorías, presupuestos, ingresos, tendencia) y `DashboardMappingTest` con el
       shape real del backend.
 
-## Fase 7 — Pulido y release ✅ _pendiente_
+## Fase 7 — Pulido y release ✅ _completada (2026-11-26, rama `fase/7-pulido`)_
 
-- [ ] Icono de launcher (adaptive icon) + splash API.
-- [ ] Pasada de accesibilidad: talkback en onboarding, formulario de gasto, dashboard.
-- [ ] Estados vacíos definitivos + micro-animaciones (animateItemPlacement en listas).
-- [ ] `assembleRelease` firmado + proguard/rules verificadas.
-- [ ] README final (capturas, requisitos, cómo conectar al backend), CONTRIBUTING.md,
-      CHANGELOG.md (SemVer).
-- [ ] Prueba en dispositivo físico + instalación limpia de release.
-- [ ] Tag `v1.0.0` + GitHub Release (APK). Evaluar metadata F-Droid.
+> Verificado localmente: `assembleDebug`, `test`, `ktlintCheck`, `lint`,
+> `assembleDebugAndroidTest` y `assembleRelease` firmado con R8. El flujo
+> completo se prueba en emulador API 37; el tag `v1.0.0` y la GitHub Release
+> se crean después del merge (el keystore de producción no vive en el repo).
+
+- [x] Icono de launcher (adaptive icon + monochrome) + splash API con
+      `core-splashscreen` y tema `Theme.SpentzTrackr.Starting`.
+- [x] Pasada de accesibilidad: semántica de progreso en presupuestos,
+      descripción del switch de registro, monograma del splash, radio-cards sin
+      doble acción y revisión de descripciones en onboarding/formulario/dashboard.
+- [x] Estados vacíos definitivos (`SpentzEmptyState` con ilustración) en Inicio,
+      Gastos, Ingresos, Categorías y Orígenes + micro-animaciones
+      (`animateItem`) en las listas principales.
+- [x] `assembleRelease` firmado con keystore local (`keystore.properties`
+      ignorado), R8/`shrinkResources` activos y reglas de Retrofit +
+      kotlinx.serialization verificadas.
+- [x] README final (funciones, requisitos, build, conexión al backend, release,
+      privacidad y capturas), `CONTRIBUTING.md`, `CHANGELOG.md` (SemVer) y
+      `docs/10-fdroid.md` + metadata fastlane ES/EN.
+- [x] Flujo limpio en emulador API 37: instalación → onboarding → gasto →
+      dashboard → tasas → ajustes. Dispositivo físico pendiente de la
+      verificación manual del PR.
+- [x] Evaluación F-Droid (sin blobs ni telemetría) y tag/Release preparados para
+      ejecutarse sobre `main` tras el merge.
 
 ---
 

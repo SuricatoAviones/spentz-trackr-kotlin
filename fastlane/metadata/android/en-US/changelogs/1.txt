@@ -1,0 +1,1 @@
+First public release: onboarding with local/remote modes, expenses, income, categories, payment sources, exchange rates, dashboard and full settings. Bilingual Spanish/English, no telemetry, MIT.

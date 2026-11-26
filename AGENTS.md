@@ -91,9 +91,14 @@ El bytecode target es Java 17 (compatible con CI y cualquier JDK 17+).
   `DolarApiClient` + `RatesSyncWorker` (WorkManager con Hilt), refresco perezoso
   "si > 60 min" no bloqueante, badge Estimada (ADR-002), pantalla de Tasas con
   override manual, histórico de 30 días y "Actualizar ahora" (local/remoto).
-- **Fase 6 — Dashboard y ajustes completos**: ✅ completada (2026-11-26) en rama
-  `fase/6-dashboard` → PR a `main`. Dashboard local/remoto con totales congelados,
-  presupuesto global y por categoría, mini-gráfico y últimos movimientos; ajustes
-  completos (moneda display, tracking type, presupuesto, comisiones, tema, idioma,
-  perfil remoto y Acerca de) con tema/idioma aplicados en vivo.
-- **Siguiente**: Fase 7 — Pulido y release v1 en rama `fase/7-pulido`.
+- **Fase 6 — Dashboard y ajustes completos**: ✅ completada (2026-11-26) y en `main`
+  (PR #6). Dashboard local/remoto con totales congelados, presupuesto global y por
+  categoría, mini-gráfico y últimos movimientos; ajustes completos (moneda display,
+  tracking type, presupuesto, comisiones, tema, idioma, perfil remoto y Acerca de)
+  con tema/idioma aplicados en vivo.
+- **Fase 7 — Pulido y release v1**: ✅ completada (2026-11-26) en rama
+  `fase/7-pulido` → PR a `main`. Splash API + icono adaptativo/monochrome, estados
+  vacíos ilustrados y micro-animaciones, pasada de accesibilidad, R8 + firma de
+  release fuera del repo, README/CONTRIBUTING/CHANGELOG y evaluación F-Droid con
+  metadata fastlane. El tag `v1.0.0` y la GitHub Release se crean tras el merge.
+- **Siguiente**: post-v1 — backlog priorizado en `docs/08-backlog-tareas.md`.

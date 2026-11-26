@@ -36,12 +36,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.suricatoaviones.spentztrackr.R
+import io.github.suricatoaviones.spentztrackr.core.designsystem.SpentzEmptyState
 import io.github.suricatoaviones.spentztrackr.core.money.CurrencyCode
 import io.github.suricatoaviones.spentztrackr.core.money.Money
 import io.github.suricatoaviones.spentztrackr.core.util.DateText
@@ -122,11 +125,12 @@ fun HomeScreen(
                 )
 
             uiState.dashboard == null || uiState.dashboard?.isEmpty == true ->
-                EmptyState(
-                    trackingType = uiState.trackingType,
-                    onAddExpense = onAddExpense,
-                    onAddIncome = onAddIncome,
-                    modifier = Modifier.padding(padding),
+                SpentzEmptyState(
+                    title = stringResource(R.string.home_empty_title),
+                    hint = stringResource(R.string.home_empty_hint),
+                    actionLabel = stringResource(R.string.home_empty_action),
+                    onAction = if (uiState.trackingType == TrackingType.INCOME) onAddIncome else onAddExpense,
+                    modifier = Modifier.padding(padding).fillMaxSize(),
                 )
 
             else ->
@@ -215,6 +219,7 @@ private fun DashboardContent(
                             onOpenIncome(movement.id)
                         }
                     },
+                    modifier = Modifier.animateItem(),
                 )
             }
         }
@@ -342,17 +347,18 @@ private fun GlobalBudgetCard(
             } else {
                 val ratio = ratio(spent, budget)
                 val exceeded = spent > budget
+                val spentOf =
+                    stringResource(
+                        R.string.home_budget_spent_of,
+                        MoneyFormat.withCurrency(spent, CurrencyCode.USD),
+                        MoneyFormat.withCurrency(budget, CurrencyCode.USD),
+                    )
                 Row(
                     modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text =
-                            stringResource(
-                                R.string.home_budget_spent_of,
-                                MoneyFormat.withCurrency(spent, CurrencyCode.USD),
-                                MoneyFormat.withCurrency(budget, CurrencyCode.USD),
-                            ),
+                        text = spentOf,
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.weight(1f),
                     )
@@ -373,7 +379,8 @@ private fun GlobalBudgetCard(
                         Modifier
                             .fillMaxWidth()
                             .padding(top = 8.dp)
-                            .height(8.dp),
+                            .height(8.dp)
+                            .semantics { stateDescription = spentOf },
                 )
                 Text(
                     text =
@@ -442,6 +449,7 @@ private fun CategoryBarRow(
     modifier: Modifier = Modifier,
 ) {
     val color = CatalogIcons.colorFor(category.color)
+    val shareLabel = stringResource(R.string.home_percent, (share * 100).toInt())
     Column(modifier = modifier.fillMaxWidth()) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
@@ -472,7 +480,8 @@ private fun CategoryBarRow(
                 Modifier
                     .fillMaxWidth()
                     .padding(top = 6.dp)
-                    .height(6.dp),
+                    .height(6.dp)
+                    .semantics { stateDescription = shareLabel },
         )
     }
 }
@@ -511,6 +520,12 @@ private fun BudgetRow(
             else -> CatalogIcons.colorFor(budget.color)
         }
     Column(modifier = modifier.fillMaxWidth()) {
+        val spentOf =
+            stringResource(
+                R.string.home_budget_spent_of,
+                MoneyFormat.withCurrency(budget.spent, CurrencyCode.USD),
+                MoneyFormat.withCurrency(budget.amount, CurrencyCode.USD),
+            )
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = budget.name,
@@ -520,12 +535,7 @@ private fun BudgetRow(
                 overflow = TextOverflow.Ellipsis,
             )
             Text(
-                text =
-                    stringResource(
-                        R.string.home_budget_spent_of,
-                        MoneyFormat.withCurrency(budget.spent, CurrencyCode.USD),
-                        MoneyFormat.withCurrency(budget.amount, CurrencyCode.USD),
-                    ),
+                text = spentOf,
                 style = MaterialTheme.typography.bodySmall,
                 color = if (budget.exceeded) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -538,7 +548,8 @@ private fun BudgetRow(
                 Modifier
                     .fillMaxWidth()
                     .padding(top = 6.dp)
-                    .height(6.dp),
+                    .height(6.dp)
+                    .semantics { stateDescription = spentOf },
         )
     }
 }
@@ -547,10 +558,11 @@ private fun BudgetRow(
 private fun MovementRow(
     movement: DashboardMovement,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier =
-            Modifier
+            modifier
                 .fillMaxWidth()
                 .clickable(onClick = onClick)
                 .padding(horizontal = 16.dp, vertical = 10.dp),
@@ -605,39 +617,6 @@ private fun MovementRow(
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
-            }
-        }
-    }
-}
-
-@Composable
-private fun EmptyState(
-    trackingType: TrackingType,
-    onAddExpense: () -> Unit,
-    onAddIncome: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.padding(24.dp),
-        ) {
-            Text(
-                text = stringResource(R.string.home_empty_title),
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Text(
-                text = stringResource(R.string.home_empty_hint),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Button(
-                onClick = if (trackingType == TrackingType.INCOME) onAddIncome else onAddExpense,
-                modifier = Modifier.padding(top = 8.dp),
-            ) {
-                Text(stringResource(R.string.home_empty_action))
             }
         }
     }

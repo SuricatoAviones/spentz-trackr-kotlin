@@ -1,6 +1,7 @@
 package io.github.suricatoaviones.spentztrackr.feature.incomes
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -44,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.suricatoaviones.spentztrackr.R
+import io.github.suricatoaviones.spentztrackr.core.designsystem.SpentzEmptyState
 import io.github.suricatoaviones.spentztrackr.core.money.CurrencyCode
 import io.github.suricatoaviones.spentztrackr.core.util.DateText
 import io.github.suricatoaviones.spentztrackr.core.util.MoneyFormat
@@ -110,20 +112,11 @@ fun IncomesScreen(
                     }
                 }
             uiState.groups.isEmpty() ->
-                Box(Modifier.padding(padding).fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text(
-                            text = stringResource(R.string.incomes_empty),
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                        Text(
-                            text = stringResource(R.string.incomes_empty_hint),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                    }
-                }
+                SpentzEmptyState(
+                    title = stringResource(R.string.incomes_empty),
+                    hint = stringResource(R.string.incomes_empty_hint),
+                    modifier = Modifier.padding(padding).fillMaxSize(),
+                )
             else -> IncomesList(uiState, onOpenIncome, Modifier.padding(padding))
         }
     }
@@ -200,6 +193,7 @@ private fun IncomesList(
                             ?.name
                             .orEmpty(),
                     onClick = { onOpenIncome(income.id) },
+                    modifier = Modifier.animateItem(),
                 )
             }
         }
@@ -211,11 +205,13 @@ private fun IncomeRow(
     income: Income,
     categoryName: String,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier =
-            Modifier
+            modifier
                 .fillMaxWidth()
+                .clickable(onClick = onClick)
                 .padding(horizontal = 16.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {

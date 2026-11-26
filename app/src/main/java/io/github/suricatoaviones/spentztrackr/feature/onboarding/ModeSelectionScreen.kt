@@ -104,7 +104,7 @@ private fun ModeCard(
             modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            RadioButton(selected = selected, onClick = onClick)
+            RadioButton(selected = selected, onClick = null)
             Spacer(modifier = Modifier.width(8.dp))
             Column {
                 Text(text = title, style = MaterialTheme.typography.titleMedium)

@@ -31,6 +31,10 @@ jobs:
       - name: ktlint + lint + tests
         run: ./gradlew ktlintCheck lint test --stacktrace
 
+      # Valida R8/ProGuard sin keystore (los secrets de firma viven fuera del repo).
+      - name: Validar release (R8, unsigned en CI)
+        run: ./gradlew assembleRelease --stacktrace
+
       - name: Assemble debug APK (solo main)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: ./gradlew assembleDebug --stacktrace

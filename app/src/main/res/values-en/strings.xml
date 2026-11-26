@@ -124,6 +124,10 @@
     <string name="catalog_delete_blocked">Cannot delete: has associated transactions</string>
     <string name="catalog_pick_icon">Icon and color…</string>
     <string name="catalog_picker_title">Icon and color</string>
+    <string name="catalog_categories_empty">No categories yet</string>
+    <string name="catalog_categories_empty_hint">Create the first one with the + button.</string>
+    <string name="catalog_sources_empty">No payment sources yet</string>
+    <string name="catalog_sources_empty_hint">Create the first one with the + button.</string>
 
     <!-- Settings: catalogs -->
     <string name="settings_open_categories">Categories</string>
@@ -162,6 +166,7 @@
     <string name="home_budget_none_hint">Set a monthly cap to see your progress here.</string>
     <string name="home_budget_set">Set in Settings</string>
     <string name="home_budget_spent_of">%1$s of %2$s</string>
+    <string name="home_percent">%1$d%%</string>
     <string name="home_budget_remaining">%s left</string>
     <string name="home_budget_exceeded">Over by %s</string>
     <string name="home_categories_title">Spending by category</string>

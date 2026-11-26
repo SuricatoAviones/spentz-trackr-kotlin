@@ -124,6 +124,10 @@
     <string name="catalog_delete_blocked">No se puede eliminar: tiene movimientos asociados</string>
     <string name="catalog_pick_icon">Icono y color…</string>
     <string name="catalog_picker_title">Icono y color</string>
+    <string name="catalog_categories_empty">Aún no hay categorías</string>
+    <string name="catalog_categories_empty_hint">Crea la primera con el botón +.</string>
+    <string name="catalog_sources_empty">Aún no hay orígenes de pago</string>
+    <string name="catalog_sources_empty_hint">Crea el primero con el botón +.</string>
 
     <!-- Ajustes: catálogos -->
     <string name="settings_open_categories">Categorías</string>
@@ -162,6 +166,7 @@
     <string name="home_budget_none_hint">Define un tope mensual para ver tu progreso aquí.</string>
     <string name="home_budget_set">Definir en Ajustes</string>
     <string name="home_budget_spent_of">%1$s de %2$s</string>
+    <string name="home_percent">%1$d%%</string>
     <string name="home_budget_remaining">Te quedan %s</string>
     <string name="home_budget_exceeded">Excedido por %s</string>
     <string name="home_categories_title">Gasto por categoría</string>

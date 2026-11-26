@@ -1,0 +1,14 @@
+Spentz Trackr is an open-source, self-hostable tracker for expenses and income in USD, Venezuelan bolívares (Bs) and USDT.
+
+Use it in local mode: everything stays in SQLite on your phone, and the Bs/USD rate syncs from dolarapi.com. Or connect it to your own Spentz Trackr backend and keep your data on your server, like in the web app.
+
+Features:
+• Expenses in USD, Bs and USDT with Bs commission, payment method, source, category, date and note.
+• Income with its own categories and frozen exchange rate.
+• Categories with monthly budget, icon and color.
+• BCV and parallel rates, manual override for the day, 30-day history and an "Estimated" badge when offline.
+• Dashboard with monthly totals, budget progress, spending by category and recent activity.
+• Full settings: display currency, tracking type, budget, commissions, light/dark theme, Spanish/English language and remote profile.
+• No telemetry, analytics, ads or proprietary blobs. MIT licensed. F-Droid friendly.
+
+Spentz Trackr never blocks on the exchange rate: if there is no network, it uses the last known rate and marks it as estimated.

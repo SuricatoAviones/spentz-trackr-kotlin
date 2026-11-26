@@ -52,6 +52,7 @@ out/
 # Keystore de firma (nunca en el repo)
 *.jks
 *.keystore
+keystore.properties
 
 # Play / F-Droid metadata temporal
 .playstore/

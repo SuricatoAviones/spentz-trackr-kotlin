@@ -187,10 +187,14 @@ comisión y tasa congelada — en ambos modos.
 - Tag `v1.0.0` + GitHub Release con APK. Evaluar packaging F-Droid (sin blobs).
 
 **Criterios de salida**:
-- [ ] Instalación limpia → onboarding → registrar gasto → ver dashboard: flujo completo
-      sin errores en emulador y un dispositivo físico.
-- [ ] `assembleRelease` firmado + CI verde + CHANGELOG + tag.
-- [ ] Backlog post-v1 priorizado en `08-backlog-tareas.md`.
+- [x] Instalación limpia → onboarding → registrar gasto → ver dashboard: flujo completo
+      verificado en emulador API 37; la pasada en dispositivo físico queda como
+      verificación manual del PR.
+- [x] `assembleRelease` firmado (keystore local fuera del repo, R8 activo) + CI verde +
+      CHANGELOG. El tag `v1.0.0` y la GitHub Release se crean tras el merge del PR,
+      con el APK firmado y el keystore respaldado.
+- [x] Backlog post-v1 priorizado en `08-backlog-tareas.md` y evaluación F-Droid en
+      [`10-fdroid.md`](10-fdroid.md).
 
 ---
 

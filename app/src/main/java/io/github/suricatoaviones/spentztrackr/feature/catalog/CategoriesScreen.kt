@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.outlined.Category
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
@@ -38,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.suricatoaviones.spentztrackr.R
+import io.github.suricatoaviones.spentztrackr.core.designsystem.SpentzEmptyState
 import io.github.suricatoaviones.spentztrackr.core.util.MoneyFormat
 import io.github.suricatoaviones.spentztrackr.domain.model.CategoryType
 
@@ -113,6 +115,13 @@ fun CategoriesScreen(
                             style = MaterialTheme.typography.titleMedium,
                         )
                     }
+                uiState.items.isEmpty() ->
+                    SpentzEmptyState(
+                        title = stringResource(R.string.catalog_categories_empty),
+                        hint = stringResource(R.string.catalog_categories_empty_hint),
+                        icon = Icons.Outlined.Category,
+                        modifier = Modifier.fillMaxSize(),
+                    )
                 else ->
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
@@ -122,6 +131,7 @@ fun CategoriesScreen(
                             Row(
                                 modifier =
                                     Modifier
+                                        .animateItem()
                                         .fillMaxWidth()
                                         .padding(horizontal = 16.dp, vertical = 8.dp),
                                 verticalAlignment = Alignment.CenterVertically,

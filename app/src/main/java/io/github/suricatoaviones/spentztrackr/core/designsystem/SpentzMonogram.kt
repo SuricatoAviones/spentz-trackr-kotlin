@@ -9,6 +9,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -22,11 +24,21 @@ fun SpentzMonogram(
     modifier: Modifier = Modifier,
     size: Dp = 72.dp,
     corner: Dp = 20.dp,
+    contentDescription: String? = null,
 ) {
     Surface(
         shape = RoundedCornerShape(corner),
         color = MaterialTheme.colorScheme.primary,
-        modifier = modifier.size(size),
+        modifier =
+            modifier
+                .size(size)
+                .then(
+                    if (contentDescription != null) {
+                        Modifier.semantics { this.contentDescription = contentDescription }
+                    } else {
+                        Modifier
+                    },
+                ),
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(

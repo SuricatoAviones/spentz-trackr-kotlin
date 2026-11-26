@@ -14,8 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import io.github.suricatoaviones.spentztrackr.R
 import io.github.suricatoaviones.spentztrackr.core.designsystem.SpentzMonogram
 import io.github.suricatoaviones.spentztrackr.core.designsystem.theme.SpentzTheme
 import io.github.suricatoaviones.spentztrackr.domain.model.AppLanguage
@@ -100,7 +102,7 @@ private fun AppLocale(
 private fun SpentzSplash() {
     Surface(modifier = Modifier.fillMaxSize()) {
         Box(contentAlignment = Alignment.Center) {
-            SpentzMonogram()
+            SpentzMonogram(contentDescription = stringResource(R.string.app_name))
         }
     }
 }
