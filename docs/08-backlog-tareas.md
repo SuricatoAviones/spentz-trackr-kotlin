@@ -191,18 +191,32 @@ Convención de commits: Conventional Commits (`feat:`, `fix:`, `docs:`, `test:`,
 - [x] Tests: `RatePolicyTest` (manual > API > estimada), `LocalRateRepositoryTest`
       (sync, fallback, refresco perezoso, histórico) y `DolarApiMappingTest`.
 
-## Fase 6 — Dashboard y ajustes ✅ _pendiente_
+## Fase 6 — Dashboard y ajustes ✅ _completada (2026-11-26, rama `fase/6-dashboard`)_
 
-- [ ] `DashboardViewModel` local: agregaciones SQL del mes (USD y USDT congelados),
-      presupuesto global + por categoría, últimos movimientos.
-- [ ] Dashboard remoto: `GET /dashboard` (+`monthly-summary`) mapeado a la misma UI.
-- [ ] Pantalla Dashboard completa de `06`: tarjetas de totales, barra de presupuesto,
-      mini-gráfico por categoría (Compose, sin librería), últimos movimientos.
-- [ ] Ajustes: moneda display, tracking_type, presupuesto, comisión mínima/%, apariencia,
-      idioma, perfil remoto (email + servidor + logout), Acerca de.
-- [ ] Persistencia de settings: local → `user_prefs`/DataStore; remoto → `PUT
-      /user/profile`.
-- [ ] Test de agregación: totales del dashboard = suma de la lista (ambos modos).
+> Verificado localmente: `assembleDebug`, `test`, `ktlintCheck`, `lint` y
+> `assembleDebugAndroidTest`. La prueba manual en emulador (cambio de fecha,
+> tema/idioma y settings remotos contra una instancia real) queda para el PR.
+
+- [x] `DashboardViewModel` local: movimientos de los últimos 6 meses filtrados por
+      fecha en Room y agregados en `BigDecimal` (`DashboardAggregator`) para que los
+      totales USD/USDT congelados cuadren exactamente con la lista; presupuesto global
+      y por categoría, tendencia de 6 meses y últimos movimientos.
+- [x] Dashboard remoto: `GET /dashboard` mapeado al mismo `Dashboard` (DTOs verificados
+      contra `DashboardController`). `monthly-summary` no se consume: el dashboard ya
+      trae totales/categorías/tendencia y la UI usa una sola forma.
+- [x] Pantalla Inicio completa de `06`: tarjetas de totales según moneda de
+      visualización, barra de presupuesto global y por categoría, mini-gráfico por
+      categoría (Compose, sin librería) y últimos movimientos clicables.
+- [x] Ajustes: moneda display, `tracking_type` (gobierna las pestañas), presupuesto,
+      comisión mínima/%, apariencia (tema), idioma, perfil remoto (email + servidor +
+      logout) y Acerca de.
+- [x] Persistencia: local → `user_prefs`/DataStore; remoto → `PUT /user/profile`
+      (moneda y tracking) + cache en `user_prefs` para uso sin red. Presupuesto y
+      comisiones se guardan en `user_prefs` en ambos modos porque la API v1 no los
+      expone (deuda técnica anotada abajo).
+- [x] Test de agregación: `DashboardAggregatorTest` (totales = suma de la lista,
+      categorías, presupuestos, ingresos, tendencia) y `DashboardMappingTest` con el
+      shape real del backend.
 
 ## Fase 7 — Pulido y release ✅ _pendiente_
 
@@ -242,3 +256,10 @@ Convención de commits: Conventional Commits (`feat:`, `fix:`, `docs:`, `test:`,
 - [ ] Confirmar redondeo exacto del backend en conversión (¿HALF_UP?) para paridad total.
 - [ ] Revisar periodicidad del scheduler de Docker (pendiente en el backend) — mientras
       tanto la app remota usa `POST /rates/sync` con moderación.
+- [ ] **Comisiones y presupuesto en remoto**: `PUT /user/profile` solo acepta
+      `name/email/default_display_currency/tracking_type`; `auth/me` tampoco devuelve
+      comisiones ni presupuesto. Hasta que el backend los exponga, la app los guarda en
+      `user_prefs` del dispositivo y la web no los verá.
+- [ ] **Moneda display en `auth/me`**: el shape actual no incluye
+      `default_display_currency`; en remoto se cachea localmente tras `PUT`.
+

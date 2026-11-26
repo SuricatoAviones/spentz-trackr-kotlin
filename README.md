@@ -22,12 +22,13 @@ El modo se puede cambiar después en **Ajustes**.
 
 ## Estado
 
-🚧 **En desarrollo — Fase 5 (tasas) completada** en la rama `fase/5-tasas`
-(PR a `main`): la app ya **sincroniza tasas reales** de `ve.dolarapi.com`
-(BCV + paralelo) con WorkManager cada ~6 h, refresco perezoso al abrir
-formularios, **badge Estimada** cuando no hay tasa del día (ADR-002: nunca se
-bloquea), override manual del día e histórico de 30 días en la nueva pantalla
-**Tasas** (Ajustes → Tasas), con "Actualizar ahora" en ambos modos. Plan en
+🚧 **En desarrollo — Fase 6 (dashboard y ajustes) completada** en la rama
+`fase/6-dashboard` (PR a `main`): la pantalla **Inicio** ya responde la pregunta
+de la app con totales del mes en USD/USDT congelados, presupuesto global y por
+categoría, mini-gráfico por categoría y últimos movimientos (local con Room;
+remoto con `GET /dashboard`). Los **Ajustes** están completos: moneda de
+visualización, tipo de seguimiento, presupuesto, comisiones, tema, idioma,
+perfil remoto y Acerca de. Plan en
 [`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md), tablero en
 [`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md) y flujo en
 [`AGENTS.md`](AGENTS.md).
