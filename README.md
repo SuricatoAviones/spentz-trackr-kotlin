@@ -42,9 +42,12 @@ El modo se puede cambiar después en **Ajustes**; cambiar de modo no copia ni bo
 ## Estado
 
 ✅ **v1.0.0 — Fase 7 (pulido y release) completada** en la rama `fase/7-pulido`
-(PR a `main`). Plan en [`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md),
-tablero en [`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md) y flujo de
-trabajo en [`AGENTS.md`](AGENTS.md). El detalle de versiones está en
+(PR #7 mergeado en `main`). Release publicada:
+[v1.0.0](https://github.com/SuricatoAviones/spentz-trackr-kotlin/releases/tag/v1.0.0)
+con APK firmado y checksum SHA-256. Plan en
+[`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md), tablero en
+[`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md) y flujo de trabajo en
+[`AGENTS.md`](AGENTS.md). El detalle de versiones está en
 [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Requisitos

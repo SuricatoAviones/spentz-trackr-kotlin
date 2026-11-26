@@ -96,9 +96,9 @@ El bytecode target es Java 17 (compatible con CI y cualquier JDK 17+).
   categoría, mini-gráfico y últimos movimientos; ajustes completos (moneda display,
   tracking type, presupuesto, comisiones, tema, idioma, perfil remoto y Acerca de)
   con tema/idioma aplicados en vivo.
-- **Fase 7 — Pulido y release v1**: ✅ completada (2026-11-26) en rama
-  `fase/7-pulido` → PR a `main`. Splash API + icono adaptativo/monochrome, estados
-  vacíos ilustrados y micro-animaciones, pasada de accesibilidad, R8 + firma de
-  release fuera del repo, README/CONTRIBUTING/CHANGELOG y evaluación F-Droid con
-  metadata fastlane. El tag `v1.0.0` y la GitHub Release se crean tras el merge.
+- **Fase 7 — Pulido y release v1**: ✅ completada (2026-11-26) y en `main` (PR #7).
+  Splash API + icono adaptativo/monochrome, estados vacíos ilustrados y
+  micro-animaciones, pasada de accesibilidad, R8 + firma de release fuera del repo,
+  README/CONTRIBUTING/CHANGELOG y evaluación F-Droid con metadata fastlane.
+  Tag `v1.0.0` y GitHub Release publicados con APK firmado + checksum.
 - **Siguiente**: post-v1 — backlog priorizado en `docs/08-backlog-tareas.md`.

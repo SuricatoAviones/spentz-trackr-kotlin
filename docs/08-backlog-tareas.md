@@ -242,8 +242,9 @@ Convención de commits: Conventional Commits (`feat:`, `fix:`, `docs:`, `test:`,
 - [x] Flujo limpio en emulador API 37: instalación → onboarding → gasto →
       dashboard → tasas → ajustes. Dispositivo físico pendiente de la
       verificación manual del PR.
-- [x] Evaluación F-Droid (sin blobs ni telemetría) y tag/Release preparados para
-      ejecutarse sobre `main` tras el merge.
+- [x] Evaluación F-Droid (sin blobs ni telemetría), tag `v1.0.0` y
+      [GitHub Release](https://github.com/SuricatoAviones/spentz-trackr-kotlin/releases/tag/v1.0.0)
+      publicados con APK firmado + checksum. Metadata fastlane lista para F-Droid.
 
 ---
 
