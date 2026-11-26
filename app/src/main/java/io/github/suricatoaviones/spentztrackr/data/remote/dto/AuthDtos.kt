@@ -44,3 +44,16 @@ data class UserDto(
     @SerialName("tracking_type") val trackingType: String? = null,
     @SerialName("created_at") val createdAt: String? = null,
 )
+
+/**
+ * `PUT /user/profile` — `ProfileController::update`. `null` = no enviar
+ * (el servidor usa `sometimes`); con `explicitNulls = false` los nulos se
+ * omiten del JSON.
+ */
+@Serializable
+data class ProfileRequestDto(
+    val name: String? = null,
+    val email: String? = null,
+    @SerialName("default_display_currency") val defaultDisplayCurrency: String? = null,
+    @SerialName("tracking_type") val trackingType: String? = null,
+)

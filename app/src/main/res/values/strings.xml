@@ -155,6 +155,57 @@
     <string name="rates_history_remote_unavailable">El histórico vive en el servidor; en modo remoto no se muestra aquí.</string>
     <string name="rates_error">No se pudieron cargar las tasas.</string>
 
+    <!-- Dashboard (Fase 6) -->
+    <string name="home_expenses">Gastos</string>
+    <string name="home_incomes">Ingresos</string>
+    <string name="home_budget_title">Presupuesto del mes</string>
+    <string name="home_budget_none_hint">Define un tope mensual para ver tu progreso aquí.</string>
+    <string name="home_budget_set">Definir en Ajustes</string>
+    <string name="home_budget_spent_of">%1$s de %2$s</string>
+    <string name="home_budget_remaining">Te quedan %s</string>
+    <string name="home_budget_exceeded">Excedido por %s</string>
+    <string name="home_categories_title">Gasto por categoría</string>
+    <string name="home_income_categories_title">Ingreso por categoría</string>
+    <string name="home_category_budgets_title">Presupuestos por categoría</string>
+    <string name="home_recent_title">Últimos movimientos</string>
+    <string name="home_empty_title">Aún no hay movimientos este mes</string>
+    <string name="home_empty_hint">Registra el primero y el dashboard se llena solo.</string>
+    <string name="home_empty_action">Registrar el primero</string>
+    <string name="home_error">No se pudo cargar el inicio</string>
+
+    <!-- Ajustes completos (Fase 6) -->
+    <string name="settings_preferences_title">Preferencias</string>
+    <string name="settings_display_currency">Moneda de visualización</string>
+    <string name="settings_currency_usd">USD ($)</string>
+    <string name="settings_currency_usdt">USDT</string>
+    <string name="settings_tracking">¿Qué quieres registrar?</string>
+    <string name="settings_budget">Presupuesto mensual (USD)</string>
+    <string name="settings_budget_hint">Vacío = sin tope. Se guarda en este dispositivo.</string>
+    <string name="settings_commission_title">Comisión en Bs</string>
+    <string name="settings_commission_min">Mínimo (Bs)</string>
+    <string name="settings_commission_rate">Porcentaje (%)</string>
+    <string name="settings_commission_hint">El formulario precarga máx(mínimo, monto × %).</string>
+    <string name="settings_save">Guardar</string>
+    <string name="settings_saved">Guardado.</string>
+    <string name="settings_invalid_budget">Presupuesto inválido: usa un número (ej. 500 o 500.50).</string>
+    <string name="settings_invalid_commission">Comisión inválida: mínimo &gt; 0 y porcentaje ≥ 0.</string>
+    <string name="settings_save_error">No se pudo guardar en el servidor. Se guardó en este dispositivo.</string>
+    <string name="settings_appearance_title">Apariencia e idioma</string>
+    <string name="settings_theme">Tema</string>
+    <string name="settings_theme_system">Sistema</string>
+    <string name="settings_theme_light">Claro</string>
+    <string name="settings_theme_dark">Oscuro</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_language_system">Sistema</string>
+    <string name="settings_language_spanish">Español</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_catalogs_title">Catálogos</string>
+    <string name="settings_about_title">Acerca de</string>
+    <string name="settings_about_version">Versión %s</string>
+    <string name="settings_about_license">Licencia MIT · sin telemetría ni analítica.</string>
+    <string name="settings_about_repo">Código: github.com/SuricatoAviones/spentz-trackr-kotlin</string>
+    <string name="settings_remote_sync_notice">Moneda y tipo de seguimiento se sincronizan con el servidor; presupuesto y comisiones viven en este teléfono.</string>
+
     <!-- Onboarding: bienvenida -->
     <string name="onboarding_welcome_title">Bienvenido a Spentz Trackr</string>
     <string name="onboarding_welcome_bullet_1">Gastos e ingresos en USD, Bs y USDT</string>

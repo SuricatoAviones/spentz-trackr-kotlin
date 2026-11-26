@@ -4,6 +4,7 @@ import io.github.suricatoaviones.spentztrackr.data.remote.dto.ApiEnvelope
 import io.github.suricatoaviones.spentztrackr.data.remote.dto.AuthTokenData
 import io.github.suricatoaviones.spentztrackr.data.remote.dto.CategoriesListDataDto
 import io.github.suricatoaviones.spentztrackr.data.remote.dto.CategoryRequestDto
+import io.github.suricatoaviones.spentztrackr.data.remote.dto.DashboardDataDto
 import io.github.suricatoaviones.spentztrackr.data.remote.dto.ExpenseRequestDto
 import io.github.suricatoaviones.spentztrackr.data.remote.dto.ExpensesListDataDto
 import io.github.suricatoaviones.spentztrackr.data.remote.dto.IdDto
@@ -12,6 +13,7 @@ import io.github.suricatoaviones.spentztrackr.data.remote.dto.IncomesListDataDto
 import io.github.suricatoaviones.spentztrackr.data.remote.dto.LoginRequest
 import io.github.suricatoaviones.spentztrackr.data.remote.dto.ManualRateDataDto
 import io.github.suricatoaviones.spentztrackr.data.remote.dto.ManualRateRequestDto
+import io.github.suricatoaviones.spentztrackr.data.remote.dto.ProfileRequestDto
 import io.github.suricatoaviones.spentztrackr.data.remote.dto.RatesDataDto
 import io.github.suricatoaviones.spentztrackr.data.remote.dto.RegisterRequest
 import io.github.suricatoaviones.spentztrackr.data.remote.dto.SourceRequestDto
@@ -48,6 +50,17 @@ interface SpentzApi {
 
     @DELETE("auth/logout")
     suspend fun logout(): ApiEnvelope<String?>
+
+    /** Actualiza moneda de visualización y `tracking_type` (docs/05). */
+    @PUT("user/profile")
+    suspend fun updateProfile(
+        @Body request: ProfileRequestDto,
+    ): ApiEnvelope<String?>
+
+    // ---------- Dashboard ----------
+
+    @GET("dashboard")
+    suspend fun getDashboard(): ApiEnvelope<DashboardDataDto>
 
     // ---------- Gastos ----------
 

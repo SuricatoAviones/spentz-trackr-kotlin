@@ -5,12 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import dagger.hilt.android.AndroidEntryPoint
-import io.github.suricatoaviones.spentztrackr.core.designsystem.theme.SpentzTheme
 import io.github.suricatoaviones.spentztrackr.navigation.RootApp
 
 /**
- * Único Activity de la app: host de la UI de Compose.
- * El gating onboarding/módulos vive en la navegación (RootApp).
+ * Única Activity de la app: host de la UI de Compose.
+ * El gating onboarding/módulos y el tema/idioma viven en [RootApp].
  */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -18,9 +17,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            SpentzTheme {
-                RootApp()
-            }
+            RootApp()
         }
     }
 }

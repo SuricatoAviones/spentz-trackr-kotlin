@@ -17,6 +17,12 @@ object DateText {
         locale: Locale = Locale.getDefault(),
     ): String = toJava(date).format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(locale))
 
+    /** "25 nov 2026" según locale. */
+    fun formatShort(
+        date: LocalDate,
+        locale: Locale = Locale.getDefault(),
+    ): String = toJava(date).format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(locale))
+
     /** "noviembre 2026" según locale. */
     fun formatMonth(
         month: YearMonth,

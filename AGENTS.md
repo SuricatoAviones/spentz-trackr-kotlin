@@ -87,8 +87,13 @@ El bytecode target es Java 17 (compatible con CI y cualquier JDK 17+).
   CRUD de ingresos (con tasa congelada en Bs), gestión de categorías (con presupuesto,
   icono/color picker y borrado bloqueado), orígenes de pago,
   `TrackingSettingsRepository`, pestaña Ingresos.
-- **Fase 5 — Tasas**: ✅ completada (2026-11-26) en rama `fase/5-tasas` → PR a `main`.
+- **Fase 5 — Tasas**: ✅ completada (2026-11-26) y en `main` (PR #5).
   `DolarApiClient` + `RatesSyncWorker` (WorkManager con Hilt), refresco perezoso
   "si > 60 min" no bloqueante, badge Estimada (ADR-002), pantalla de Tasas con
   override manual, histórico de 30 días y "Actualizar ahora" (local/remoto).
-- **Siguiente**: Fase 6 — Dashboard y ajustes completos en rama `fase/6-dashboard`.
+- **Fase 6 — Dashboard y ajustes completos**: ✅ completada (2026-11-26) en rama
+  `fase/6-dashboard` → PR a `main`. Dashboard local/remoto con totales congelados,
+  presupuesto global y por categoría, mini-gráfico y últimos movimientos; ajustes
+  completos (moneda display, tracking type, presupuesto, comisiones, tema, idioma,
+  perfil remoto y Acerca de) con tema/idioma aplicados en vivo.
+- **Siguiente**: Fase 7 — Pulido y release v1 en rama `fase/7-pulido`.

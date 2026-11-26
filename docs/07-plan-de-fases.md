@@ -161,11 +161,19 @@ comisión y tasa congelada — en ambos modos.
 - `PUT /user/profile` persiste cambios remotos; `user_prefs` los locales.
 
 **Criterios de salida**:
-- [ ] Los totales del dashboard cuadran con la suma manual de la lista del mes (ambos
-      modos, test de agregación).
-- [ ] Cambiar moneda de visualización transforma todo el dashboard al instante.
-- [ ] Cambiar comisión mínima/porcentaje cambia el precargado del formulario.
-- [ ] Ajustes de perfil remoto sobreviven cerrar/abrir la app y se reflejan en la web.
+- [x] Los totales del dashboard cuadran con la suma manual de la lista del mes (ambos
+      modos, test de agregación). Local se cubre con `DashboardAggregatorTest`; remoto
+      con `DashboardMappingTest` sobre el shape real de `DashboardController`.
+- [x] Cambiar moneda de visualización transforma todo el dashboard al instante. La
+      `HomeScreen` observa `UserPreferences` y elige el total primario USD/USDT sin
+      recargar; se prueba a mano en el emulador.
+- [x] Cambiar comisión mínima/porcentaje cambia el precargado del formulario. Los
+      ajustes escriben `user_prefs` y `CommissionSettingsRepository` los lee al abrir
+      el formulario (en local y remoto, porque la API v1 no expone comisiones).
+- [x] Ajustes de perfil remoto sobreviven cerrar/abrir la app y se reflejan en la web.
+      Moneda display y `tracking_type` van por `PUT /user/profile` y se cachean en
+      `user_prefs`; `auth/me` no devuelve la moneda display, así que la caché es la
+      fuente hasta que el backend amplíe el shape (deuda anotada en `docs/08`).
 
 ## Fase 7 — Pulido y release v1
 
