@@ -3,4 +3,12 @@
     <!-- Tema base de la ventana: la UI real la pinta Compose (SpentzTheme).
          Solo define la apariencia del arranque hasta que Compose toma el control. -->
     <style name="Theme.SpentzTrackr" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <!-- Splash API (Android 12+ y compatibilidad con core-splashscreen).
+         El icono es el mismo adaptive icon de la app; el fondo es la semilla verde. -->
+    <style name="Theme.SpentzTrackr.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/ic_launcher_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.SpentzTrackr</item>
+    </style>
 </resources>

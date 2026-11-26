@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     // AGP 9 trae Kotlin built-in: no se aplica org.jetbrains.kotlin.android.
@@ -9,6 +11,16 @@ plugins {
     alias(libs.plugins.ktlint)
 }
 
+// Firma de release: `keystore.properties` NO se commitea (ver .gitignore).
+// Sin ese archivo, `assembleRelease` genera un APK unsigned (útil en CI).
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+val keystoreProperties =
+    Properties().apply {
+        if (keystorePropertiesFile.exists()) {
+            keystorePropertiesFile.inputStream().use { load(it) }
+        }
+    }
+
 android {
     namespace = "io.github.suricatoaviones.spentztrackr"
     compileSdk = 37
@@ -18,13 +30,26 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = 1
-        versionName = "0.1.0"
+        versionName = "1.0.0"
+    }
+
+    signingConfigs {
+        val releaseStoreFile = keystoreProperties.getProperty("storeFile")
+        if (keystorePropertiesFile.exists() && releaseStoreFile != null) {
+            create("release") {
+                storeFile = rootProject.file(releaseStoreFile)
+                storePassword = keystoreProperties.getProperty("storePassword")
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+            }
+        }
     }
 
     buildTypes {
         release {
-            // El minify y las reglas de R8 se deciden en la Fase 7 (release).
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.findByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -54,6 +79,7 @@ dependencies {
 
     // AndroidX base
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
