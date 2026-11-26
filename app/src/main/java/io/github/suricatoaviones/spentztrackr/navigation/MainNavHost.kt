@@ -4,9 +4,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Payments
 import androidx.compose.material.icons.filled.ReceiptLong
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Payments
 import androidx.compose.material.icons.outlined.ReceiptLong
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
@@ -66,7 +68,7 @@ fun MainNavHost(
                 add(Tab(Routes.EXPENSES, R.string.nav_expenses, Icons.Filled.ReceiptLong, Icons.Outlined.ReceiptLong))
             }
             if (trackingType != TrackingType.EXPENSES) {
-                add(Tab(Routes.INCOMES, R.string.nav_incomes, Icons.Filled.ReceiptLong, Icons.Outlined.ReceiptLong))
+                add(Tab(Routes.INCOMES, R.string.nav_incomes, Icons.Filled.Payments, Icons.Outlined.Payments))
             }
             add(Tab(Routes.SETTINGS, R.string.nav_settings, Icons.Filled.Settings, Icons.Outlined.Settings))
         }

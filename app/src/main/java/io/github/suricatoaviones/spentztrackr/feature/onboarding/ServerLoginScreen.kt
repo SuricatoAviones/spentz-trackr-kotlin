@@ -29,6 +29,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -132,12 +134,17 @@ fun ServerLoginScreen(
                         .padding(top = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
+                val registerLabel = stringResource(R.string.onboarding_server_register_toggle)
                 Text(
-                    text = stringResource(R.string.onboarding_server_register_toggle),
+                    text = registerLabel,
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.weight(1f),
                 )
-                Switch(checked = uiState.register, onCheckedChange = viewModel::onRegisterToggle)
+                Switch(
+                    checked = uiState.register,
+                    onCheckedChange = viewModel::onRegisterToggle,
+                    modifier = Modifier.semantics { contentDescription = registerLabel },
+                )
             }
 
             AnimatedVisibility(visible = uiState.register) {

@@ -1,6 +1,7 @@
 package io.github.suricatoaviones.spentztrackr.feature.expenses
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.suricatoaviones.spentztrackr.R
+import io.github.suricatoaviones.spentztrackr.core.designsystem.SpentzEmptyState
 import io.github.suricatoaviones.spentztrackr.core.money.CurrencyCode
 import io.github.suricatoaviones.spentztrackr.core.util.DateText
 import io.github.suricatoaviones.spentztrackr.core.util.MoneyFormat
@@ -89,7 +91,12 @@ fun ExpensesScreen(
                     onRetry = viewModel::retry,
                     modifier = Modifier.padding(padding),
                 )
-            uiState.groups.isEmpty() -> EmptyState(Modifier.padding(padding))
+            uiState.groups.isEmpty() ->
+                SpentzEmptyState(
+                    title = stringResource(R.string.expenses_empty),
+                    hint = stringResource(R.string.expenses_empty_hint),
+                    modifier = Modifier.padding(padding).fillMaxSize(),
+                )
             else -> ExpensesList(uiState, onOpenExpense, Modifier.padding(padding))
         }
     }
@@ -136,6 +143,7 @@ private fun ExpensesList(
                             ?.name
                             .orEmpty(),
                     onClick = { onOpenExpense(expense.id) },
+                    modifier = Modifier.animateItem(),
                 )
             }
         }
@@ -199,11 +207,13 @@ private fun ExpenseRow(
     categoryName: String,
     sourceName: String,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier =
-            Modifier
+            modifier
                 .fillMaxWidth()
+                .clickable(onClick = onClick)
                 .padding(horizontal = 16.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -254,24 +264,6 @@ private fun ExpenseRow(
 private fun LoadingState(modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         CircularProgressIndicator()
-    }
-}
-
-@Composable
-private fun EmptyState(modifier: Modifier = Modifier) {
-    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text(
-                text = stringResource(R.string.expenses_empty),
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Text(
-                text = stringResource(R.string.expenses_empty_hint),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-        }
     }
 }
 
