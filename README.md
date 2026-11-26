@@ -3,7 +3,7 @@
 **Cliente Android nativo de [Spentz Trackr](https://github.com/SuricatoAviones/spentz-trackr)**, el control de
 gastos e ingresos multi-moneda (USD · Bs · USDT) open source y auto-hospedable.
 
-Kotlin · Jetpack Compose · Material 3 · Room (SQLite) · Retrofit · Hilt.
+Kotlin · Jetpack Compose · Material 3 · Room (SQLite) · Retrofit · Hilt · WorkManager.
 
 ---
 
@@ -18,20 +18,131 @@ La app Android de Spentz Trackr. Al primer arranque eliges cómo usarla:
   teléfono, con la misma lógica de negocio (conversión congelada, comisiones Bs, tasas
   BCV/paralelo desde [ve.dolarapi.com](https://ve.dolarapi.com)).
 
-El modo se puede cambiar después en **Ajustes**.
+El modo se puede cambiar después en **Ajustes**; cambiar de modo no copia ni borra datos.
+
+## Funcionalidad de la v1
+
+- **Gastos** en USD, Bs y USDT, con comisión Bs (`max(mínimo, monto × %)`), método de pago,
+  origen, categoría, fecha, nota y equivalente USD/USDT **congelado al escribir**.
+- **Ingresos** con tasa congelada en Bs y su propio catálogo de categorías.
+- **Categorías** con presupuesto mensual, icono y color; borrado bloqueado si tienen
+  movimientos.
+- **Orígenes de pago** editables.
+- **Tasas** BCV y paralelo: sincronización con dolarapi (WorkManager ~6 h), refresco
+  perezoso al abrir formularios, override manual del día, histórico de 30 días y badge
+  **Estimada** cuando no hay red (la app nunca se bloquea por la tasa).
+- **Dashboard** con totales del mes, presupuesto global y por categoría, mini-gráfico por
+  categoría y últimos movimientos.
+- **Ajustes completos**: moneda de visualización, tipo de seguimiento, presupuesto,
+  comisiones, tema (claro/oscuro/sistema), idioma (ES/EN/sistema), perfil remoto y
+  Acerca de.
+- **Bilingüe** español (por defecto) e inglés, con paridad de claves.
+- **Sin telemetría, analítica ni blobs propietarios**; licencia MIT, objetivo F-Droid.
 
 ## Estado
 
-🚧 **En desarrollo — Fase 6 (dashboard y ajustes) completada** en la rama
-`fase/6-dashboard` (PR a `main`): la pantalla **Inicio** ya responde la pregunta
-de la app con totales del mes en USD/USDT congelados, presupuesto global y por
-categoría, mini-gráfico por categoría y últimos movimientos (local con Room;
-remoto con `GET /dashboard`). Los **Ajustes** están completos: moneda de
-visualización, tipo de seguimiento, presupuesto, comisiones, tema, idioma,
-perfil remoto y Acerca de. Plan en
-[`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md), tablero en
-[`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md) y flujo en
-[`AGENTS.md`](AGENTS.md).
+✅ **v1.0.0 — Fase 7 (pulido y release) completada** en la rama `fase/7-pulido`
+(PR a `main`). Plan en [`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md),
+tablero en [`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md) y flujo de
+trabajo en [`AGENTS.md`](AGENTS.md). El detalle de versiones está en
+[`CHANGELOG.md`](CHANGELOG.md).
+
+## Requisitos
+
+- Android 8.0 (API 26) o superior.
+- JDK 17 (el JBR de Android Studio sirve).
+- Android SDK con `compileSdk 37` / `targetSdk 36`.
+- Android Studio reciente (AGP 9.3.3 + Gradle 9.7.0 + Kotlin 2.4.21).
+
+## Compilar y ejecutar
+
+```powershell
+# Windows (PowerShell)
+$env:JAVA_HOME = "C:\Program Files\Android\Android Studio\jbr"
+.\gradlew.bat assembleDebug
+.\gradlew.bat test
+.\gradlew.bat ktlintCheck lint
+```
+
+```bash
+# Linux / macOS / CI
+./gradlew assembleDebug test ktlintCheck lint
+```
+
+Instala el APK de debug en un emulador o teléfono:
+
+```powershell
+adb install -r app/build/outputs/apk/debug/app-debug.apk
+```
+
+El detalle del entorno (Android Studio, emulador, SDK) está en
+[`docs/09-entorno-y-herramientas.md`](docs/09-entorno-y-herramientas.md).
+
+## Conectar con tu backend
+
+1. Instala el backend de [SuricatoAviones/spentz-trackr](https://github.com/SuricatoAviones/spentz-trackr)
+   en tu servidor.
+2. En el onboarding elige **Conectar a mi servidor**.
+3. Escribe la URL **sin** `/api/v1` (ej. `gastos.midominio.com`); la app añade la ruta.
+4. Inicia sesión con tu cuenta (o crea una si el servidor lo permite).
+
+Si la URL es `http://`, la app avisa de que la conexión no va cifrada. Para uso real,
+usa HTTPS. La app **no** llama a dolarapi en modo remoto: las tasas las resuelve tu
+servidor.
+
+## Release
+
+El APK de release se firma con un keystore **fuera del repositorio**:
+
+```powershell
+Copy-Item keystore.properties.example keystore.properties
+# edita storeFile, storePassword, keyAlias y keyPassword
+.\gradlew.bat assembleRelease
+```
+
+Salida: `app/build/outputs/apk/release/app-release.apk`.
+Sin `keystore.properties`, Gradle genera un APK **unsigned** (válido para CI/lint).
+No commitees nunca `keystore.properties` ni el `.jks`; haz copia de seguridad del
+keystore: sin él no podrás actualizar la app en Google Play/F-Droid.
+
+## Privacidad y F-Droid
+
+- Modo local: los movimientos no salen del teléfono. La única petición externa es a
+  `ve.dolarapi.com` para las tasas.
+- Modo remoto: la app solo habla con la URL de tu servidor.
+- Sin SDK de analítica, crash reporting ni publicidad. Ver
+  [`docs/10-fdroid.md`](docs/10-fdroid.md) para el empaquetado y la metadata de F-Droid.
+
+## Capturas
+
+Capturas reales de la v1.0.0 en un emulador API 37 (onboarding local, un gasto
+de ejemplo y tasas BCV/paralelo reales):
+
+| Inicio | Gastos | Tasas |
+|---|---|---|
+| ![Inicio](docs/screenshots/06-inicio-con-datos.png) | ![Gastos](docs/screenshots/07-gastos.png) | ![Tasas](docs/screenshots/09-tasas.png) |
+
+| Onboarding | Formulario de gasto | Ajustes |
+|---|---|---|
+| ![Onboarding](docs/screenshots/01-onboarding-bienvenida.png) | ![Formulario](docs/screenshots/05-formulario-gasto.png) | ![Ajustes](docs/screenshots/08-ajustes.png) |
+
+El resto (estado vacío de Inicio, selección de modo, setup local y ajustes de
+apariencia) vive en [`docs/screenshots/`](docs/screenshots/). Se regeneran con
+un emulador API 37; ver [`docs/screenshots/README.md`](docs/screenshots/README.md).
+
+## Arquitectura
+
+- **Clean-ish por capas**: `domain` (modelos, repositorios y servicios puros),
+  `data` (Room/Retrofit/DataStore) y `feature` (Compose + ViewModel).
+- **Un contrato, dos fuentes** (ADR-A01): repositorios local/remoto + delegador por modo.
+- **Dinero exacto** (ADR-A03): `BigDecimal`, sin `Double`; Room guarda texto canónico.
+- **Conversión congelada** (ADR-001): los equivalentes USD/USDT se calculan al escribir y
+  no se recalculan.
+- **Sin Hilt en tests**: los repositorios son interfaces y los tests usan fakes.
+
+Detalle en [`docs/02-arquitectura.md`](docs/02-arquitectura.md).
+
+## Documentación
 
 | Documento | Descripción |
 |---|---|
@@ -45,38 +156,14 @@ perfil remoto y Acerca de. Plan en
 | [`docs/07-plan-de-fases.md`](docs/07-plan-de-fases.md) | Plan de fases con criterios de salida |
 | [`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md) | Backlog de tareas detallado |
 | [`docs/09-entorno-y-herramientas.md`](docs/09-entorno-y-herramientas.md) | Android Studio / IntelliJ, emulador y convenciones |
-
-## Cómo abrir el proyecto
-
-Resumen rápido — el detalle paso a paso está en
-[`docs/09-entorno-y-herramientas.md`](docs/09-entorno-y-herramientas.md):
-
-1. **Android Studio**: `File → Open…` y selecciona esta carpeta
-   (`spentz-trackr-kotlin`). Espera el *Gradle sync* (la primera vez descarga
-   dependencias; ya es un proyecto Gradle completo desde la Fase 0).
-2. Ejecuta con ▶ (*Run*) sobre un emulador del **Device Manager** o un teléfono con
-   *Depuración USB* activada. Verás el placeholder de Inicio de la Fase 0.
-3. **IntelliJ IDEA** sirve para revisar código y Markdown, pero para **compilar y correr**
-   un proyecto Android usa Android Studio (es IntelliJ + las herramientas Android).
-
-Tu SDK local ya tiene las plataformas `android-36.1` y `android-37.0` instaladas
-(detalle del entorno verificado en
-[`docs/09-entorno-y-herramientas.md`](docs/09-entorno-y-herramientas.md)).
-
-## Relación con el proyecto web
-
-Este repo es el **cliente Android**. El backend (Laravel), la web app y su documentación
-viven en [SuricatoAviones/spentz-trackr](https://github.com/SuricatoAviones/spentz-trackr).
-Las reglas de negocio son las mismas y sus decisiones (ADRs) se respetan aquí; los ADRs
-propios de Android están en [`docs/02-arquitectura.md`](docs/02-arquitectura.md).
-
-El proyecto se desarrolla en español; la aplicación es bilingüe (ES/EN).
+| [`docs/10-fdroid.md`](docs/10-fdroid.md) | Empaquetado, metadata y publicación en F-Droid |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Cómo contribuir: ramas, tests, estilo y PRs |
+| [`CHANGELOG.md`](CHANGELOG.md) | Historial de versiones (SemVer) |
 
 ## Contribuir
 
 Issues y pull requests bienvenidos. Lee [CONTRIBUTING.md](CONTRIBUTING.md) antes de
-empezar cuando exista; mientras tanto, el punto de partida son los documentos de
-[`docs/`](docs/README.md).
+empezar; el flujo de fases y commits está en [`AGENTS.md`](AGENTS.md).
 
 ## Seguridad
 

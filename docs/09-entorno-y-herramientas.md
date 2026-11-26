@@ -84,9 +84,10 @@ aparte.
 
 ```
 gradlew assembleDebug      # compilar APK debug
+gradlew assembleRelease    # APK release (firmado si existe keystore.properties)
 gradlew lint ktlintCheck    # calidad estática
 gradlew test               # tests JVM (dominio, viewmodels)
-gradlew connectedAndroidTest # tests de instrumentación (emulador/dispositivo conectido)
+gradlew connectedAndroidTest # tests de instrumentación (emulador/dispositivo conectado)
 ```
 
 (En PowerShell de Windows: `.\gradlew …`.) Los mismos comandos corren en CI.
@@ -112,9 +113,12 @@ de `android.compileOptions.targetCompatibility` (Java 17). Referencia:
 
 ## CI — GitHub Actions
 
-- En cada push/PR: `lint` + `ktlintCheck` + `test` (rápidos, JVM).
+- En cada push/PR: `lint` + `ktlintCheck` + `test` (rápidos, JVM) y
+  `assembleRelease` unsigned para validar R8/ProGuard.
 - En `main`: además `assembleDebug` — el APK queda como artefacto descargable.
 - No usamos emulador en CI en v1 (los androidTest corren en local); se evalúa post-v1.
+- La firma de release usa `keystore.properties` local (gitignored); los secrets de
+  producción no viven en el repo. Ver [`10-fdroid.md`](10-fdroid.md).
 
 ## Convenciones del repo
 

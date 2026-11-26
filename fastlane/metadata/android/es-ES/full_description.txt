@@ -1,0 +1,14 @@
+Spentz Trackr es un registro de gastos e ingresos open source y auto-hospedable, en USD, bolívares (Bs) y USDT.
+
+Úsalo en modo local: todo se guarda en SQLite en tu teléfono y la tasa Bs/USD se sincroniza desde dolarapi.com. O conéctalo a tu propia instancia del backend de Spentz Trackr y mantén tus datos en tu servidor, igual que en la web.
+
+Funciones:
+• Gastos en USD, Bs y USDT con comisión en Bs, método de pago, origen, categoría, fecha y nota.
+• Ingresos con sus propias categorías y tasa congelada.
+• Categorías con presupuesto mensual, icono y color.
+• Tasas BCV y paralelo, override manual del día, histórico de 30 días y badge "Estimada" sin conexión.
+• Dashboard con totales del mes, progreso del presupuesto, gasto por categoría y últimos movimientos.
+• Ajustes completos: moneda de visualización, tipo de seguimiento, presupuesto, comisiones, tema claro/oscuro, idioma español/inglés y perfil remoto.
+• Sin telemetría, analítica, publicidad ni blobs propietarios. Licencia MIT. Compatible con F-Droid.
+
+Spentz Trackr nunca se bloquea por la tasa de cambio: si no hay red, usa la última conocida y la marca como estimada.

@@ -22,6 +22,7 @@ documenta el cliente Android y su integración con ellos.
 | [07-plan-de-fases.md](07-plan-de-fases.md) | Fases de implementación con entregables y criterios de salida |
 | [08-backlog-tareas.md](08-backlog-tareas.md) | Checklist de tareas por fase y backlog post-v1 |
 | [09-entorno-y-herramientas.md](09-entorno-y-herramientas.md) | Abrir en Android Studio / IntelliJ, emulador, convenciones y CI |
+| [10-fdroid.md](10-fdroid.md) | Empaquetado, metadata y publicación en F-Droid |
 
 ## Cómo leer esta documentación
 
