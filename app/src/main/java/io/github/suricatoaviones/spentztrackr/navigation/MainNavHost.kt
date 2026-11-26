@@ -18,6 +18,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -29,6 +31,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import io.github.suricatoaviones.spentztrackr.R
 import io.github.suricatoaviones.spentztrackr.domain.model.CategoryType
+import io.github.suricatoaviones.spentztrackr.domain.model.TrackingType
 import io.github.suricatoaviones.spentztrackr.feature.catalog.CategoriesScreen
 import io.github.suricatoaviones.spentztrackr.feature.catalog.CategoryFormScreen
 import io.github.suricatoaviones.spentztrackr.feature.catalog.SourcesScreen
@@ -47,17 +50,26 @@ import io.github.suricatoaviones.spentztrackr.feature.settings.SettingsScreen
  * usuario registra ingresos (`tracking_type` del backend, docs/04).
  */
 @Composable
-fun MainNavHost(navController: NavHostController = rememberNavController()) {
+fun MainNavHost(
+    navController: NavHostController = rememberNavController(),
+    viewModel: MainNavViewModel = hiltViewModel(),
+) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
+    val preferences by viewModel.preferences.collectAsStateWithLifecycle()
+    val trackingType = preferences?.trackingType ?: TrackingType.BOTH
 
     val tabs =
-        listOf(
-            Tab(Routes.HOME, R.string.nav_home, Icons.Filled.Home, Icons.Outlined.Home),
-            Tab(Routes.EXPENSES, R.string.nav_expenses, Icons.Filled.ReceiptLong, Icons.Outlined.ReceiptLong),
-            Tab(Routes.INCOMES, R.string.nav_incomes, Icons.Filled.ReceiptLong, Icons.Outlined.ReceiptLong),
-            Tab(Routes.SETTINGS, R.string.nav_settings, Icons.Filled.Settings, Icons.Outlined.Settings),
-        )
+        buildList {
+            add(Tab(Routes.HOME, R.string.nav_home, Icons.Filled.Home, Icons.Outlined.Home))
+            if (trackingType != TrackingType.INCOME) {
+                add(Tab(Routes.EXPENSES, R.string.nav_expenses, Icons.Filled.ReceiptLong, Icons.Outlined.ReceiptLong))
+            }
+            if (trackingType != TrackingType.EXPENSES) {
+                add(Tab(Routes.INCOMES, R.string.nav_incomes, Icons.Filled.ReceiptLong, Icons.Outlined.ReceiptLong))
+            }
+            add(Tab(Routes.SETTINGS, R.string.nav_settings, Icons.Filled.Settings, Icons.Outlined.Settings))
+        }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -90,7 +102,13 @@ fun MainNavHost(navController: NavHostController = rememberNavController()) {
                     .padding(padding),
         ) {
             composable(Routes.HOME) {
-                HomeScreen(onAddExpense = { navController.navigate(Routes.expenseForm()) })
+                HomeScreen(
+                    onAddExpense = { navController.navigate(Routes.expenseForm()) },
+                    onAddIncome = { navController.navigate(Routes.incomeForm()) },
+                    onOpenExpense = { id -> navController.navigate(Routes.expenseDetail(id)) },
+                    onOpenIncome = { id -> navController.navigate(Routes.incomeDetail(id)) },
+                    onOpenSettings = { navController.navigateToTab(Routes.SETTINGS) },
+                )
             }
             composable(Routes.EXPENSES) {
                 ExpensesScreen(
