@@ -7,32 +7,40 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.github.suricatoaviones.spentztrackr.data.repository.DelegatingCategoryRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.DelegatingCommissionSettingsRepository
+import io.github.suricatoaviones.spentztrackr.data.repository.DelegatingDashboardRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.DelegatingExpenseRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.DelegatingIncomeRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.DelegatingPaymentSourceRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.DelegatingRateRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.DelegatingTrackingSettingsRepository
+import io.github.suricatoaviones.spentztrackr.data.repository.DelegatingUserPreferencesRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.LocalCategoryRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.LocalCommissionSettingsRepository
+import io.github.suricatoaviones.spentztrackr.data.repository.LocalDashboardRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.LocalExpenseRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.LocalIncomeRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.LocalPaymentSourceRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.LocalRateRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.LocalTrackingSettingsRepository
+import io.github.suricatoaviones.spentztrackr.data.repository.LocalUserPreferencesRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.RemoteCategoryRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.RemoteCommissionSettingsRepository
+import io.github.suricatoaviones.spentztrackr.data.repository.RemoteDashboardRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.RemoteExpenseRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.RemoteIncomeRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.RemotePaymentSourceRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.RemoteRateRepository
 import io.github.suricatoaviones.spentztrackr.data.repository.RemoteTrackingSettingsRepository
+import io.github.suricatoaviones.spentztrackr.data.repository.RemoteUserPreferencesRepository
 import io.github.suricatoaviones.spentztrackr.domain.repository.CategoryRepository
 import io.github.suricatoaviones.spentztrackr.domain.repository.CommissionSettingsRepository
+import io.github.suricatoaviones.spentztrackr.domain.repository.DashboardRepository
 import io.github.suricatoaviones.spentztrackr.domain.repository.ExpenseRepository
 import io.github.suricatoaviones.spentztrackr.domain.repository.IncomeRepository
 import io.github.suricatoaviones.spentztrackr.domain.repository.PaymentSourceRepository
 import io.github.suricatoaviones.spentztrackr.domain.repository.RateRepository
 import io.github.suricatoaviones.spentztrackr.domain.repository.TrackingSettingsRepository
+import io.github.suricatoaviones.spentztrackr.domain.repository.UserPreferencesRepository
 import javax.inject.Singleton
 
 /**
@@ -71,6 +79,14 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindTrackingSettingsRepository(impl: DelegatingTrackingSettingsRepository): TrackingSettingsRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindDashboardRepository(impl: DelegatingDashboardRepository): DashboardRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindUserPreferencesRepository(impl: DelegatingUserPreferencesRepository): UserPreferencesRepository
 
     // Los @Provides del companion de una @Module abstracta forman parte del
     // módulo: no se anota el companion (Hilt lo rechaza como módulo aparte).
@@ -130,5 +146,21 @@ abstract class RepositoryModule {
         @Provides
         @RemoteSource
         fun provideRemoteTrackingSettings(impl: RemoteTrackingSettingsRepository): TrackingSettingsRepository = impl
+
+        @Provides
+        @LocalSource
+        fun provideLocalDashboardRepository(impl: LocalDashboardRepository): DashboardRepository = impl
+
+        @Provides
+        @RemoteSource
+        fun provideRemoteDashboardRepository(impl: RemoteDashboardRepository): DashboardRepository = impl
+
+        @Provides
+        @LocalSource
+        fun provideLocalUserPreferencesRepository(impl: LocalUserPreferencesRepository): UserPreferencesRepository = impl
+
+        @Provides
+        @RemoteSource
+        fun provideRemoteUserPreferencesRepository(impl: RemoteUserPreferencesRepository): UserPreferencesRepository = impl
     }
 }

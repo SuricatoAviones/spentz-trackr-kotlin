@@ -155,6 +155,57 @@
     <string name="rates_history_remote_unavailable">History lives on the server; it isn\'t shown in remote mode.</string>
     <string name="rates_error">Couldn\'t load exchange rates.</string>
 
+    <!-- Dashboard (Phase 6) -->
+    <string name="home_expenses">Expenses</string>
+    <string name="home_incomes">Income</string>
+    <string name="home_budget_title">Monthly budget</string>
+    <string name="home_budget_none_hint">Set a monthly cap to see your progress here.</string>
+    <string name="home_budget_set">Set in Settings</string>
+    <string name="home_budget_spent_of">%1$s of %2$s</string>
+    <string name="home_budget_remaining">%s left</string>
+    <string name="home_budget_exceeded">Over by %s</string>
+    <string name="home_categories_title">Spending by category</string>
+    <string name="home_income_categories_title">Income by category</string>
+    <string name="home_category_budgets_title">Category budgets</string>
+    <string name="home_recent_title">Recent activity</string>
+    <string name="home_empty_title">No activity this month yet</string>
+    <string name="home_empty_hint">Add the first one and the dashboard fills itself.</string>
+    <string name="home_empty_action">Add the first one</string>
+    <string name="home_error">Couldn\'t load the dashboard</string>
+
+    <!-- Full settings (Phase 6) -->
+    <string name="settings_preferences_title">Preferences</string>
+    <string name="settings_display_currency">Display currency</string>
+    <string name="settings_currency_usd">USD ($)</string>
+    <string name="settings_currency_usdt">USDT</string>
+    <string name="settings_tracking">What do you want to track?</string>
+    <string name="settings_budget">Monthly budget (USD)</string>
+    <string name="settings_budget_hint">Empty = no cap. Stored on this device.</string>
+    <string name="settings_commission_title">Commission in Bs</string>
+    <string name="settings_commission_min">Minimum (Bs)</string>
+    <string name="settings_commission_rate">Percentage (%)</string>
+    <string name="settings_commission_hint">The form preloads max(minimum, amount × %).</string>
+    <string name="settings_save">Save</string>
+    <string name="settings_saved">Saved.</string>
+    <string name="settings_invalid_budget">Invalid budget: use a number (e.g. 500 or 500.50).</string>
+    <string name="settings_invalid_commission">Invalid commission: minimum &gt; 0 and percentage ≥ 0.</string>
+    <string name="settings_save_error">Couldn\'t save to the server. It was saved on this device.</string>
+    <string name="settings_appearance_title">Appearance and language</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_theme_system">System</string>
+    <string name="settings_theme_light">Light</string>
+    <string name="settings_theme_dark">Dark</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_language_system">System</string>
+    <string name="settings_language_spanish">Español</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_catalogs_title">Catalogs</string>
+    <string name="settings_about_title">About</string>
+    <string name="settings_about_version">Version %s</string>
+    <string name="settings_about_license">MIT license · no telemetry or analytics.</string>
+    <string name="settings_about_repo">Code: github.com/SuricatoAviones/spentz-trackr-kotlin</string>
+    <string name="settings_remote_sync_notice">Currency and tracking type sync with the server; budget and commissions live on this phone.</string>
+
     <!-- Onboarding: welcome -->
     <string name="onboarding_welcome_title">Welcome to Spentz Trackr</string>
     <string name="onboarding_welcome_bullet_1">Expenses and income in USD, Bs and USDT</string>
