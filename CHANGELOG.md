@@ -5,6 +5,13 @@ y [SemVer](https://semver.org/lang/es/).
 
 ## [Unreleased]
 
+### Documentación
+
+- Hoja de ruta post-v1 con matriz de paridad web/Android, fases F8–F14,
+  dependencias del backend y criterios de salida (`docs/11`).
+- Diseño técnico de widgets Glance: catálogo, datos, actualización, deep links,
+  privacidad y pruebas (`docs/12`).
+
 ## [1.0.0] — 2026-11-26
 
 Primera versión pública del cliente Android de Spentz Trackr.

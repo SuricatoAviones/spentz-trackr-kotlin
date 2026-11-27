@@ -23,6 +23,8 @@ documenta el cliente Android y su integración con ellos.
 | [08-backlog-tareas.md](08-backlog-tareas.md) | Checklist de tareas por fase y backlog post-v1 |
 | [09-entorno-y-herramientas.md](09-entorno-y-herramientas.md) | Abrir en Android Studio / IntelliJ, emulador, convenciones y CI |
 | [10-fdroid.md](10-fdroid.md) | Empaquetado, metadata y publicación en F-Droid |
+| [11-hoja-de-ruta-post-v1.md](11-hoja-de-ruta-post-v1.md) | Paridad con la web, fases post-v1, dependencias y criterios |
+| [12-widgets.md](12-widgets.md) | Diseño de widgets Glance: catálogo, datos, actualización y pruebas |
 
 ## Cómo leer esta documentación
 

@@ -250,20 +250,22 @@ Convención de commits: Conventional Commits (`feat:`, `fix:`, `docs:`, `test:`,
 
 ## Backlog post-v1 (priorizado, sin fecha)
 
-| # | Item | Complejidad | Notas |
+> Alcance detallado, dependencias del backend y criterios de salida:
+> [`11-hoja-de-ruta-post-v1.md`](11-hoja-de-ruta-post-v1.md).
+> Diseño de widgets: [`12-widgets.md`](12-widgets.md).
+
+| Fase | Item | Complejidad | Notas |
 |---|---|---|---|
-| P1 | Gastos mixtos (`expense_items`) | M | Esquema ya existe; UI en formulario (porciones extra) |
-| P1 | Comprobantes (foto) | M | Local: archivos app-scoped; remoto: **verificar multipart en OpenAPI** |
-| P2 | Metas de ahorro + aportes | M | API completa (`savings-goals`, contributions) |
-| P2 | Pagos recurrentes + `pay` | M | API completa; notificaciones de vencidos = WorkManager |
-| P3 | Reportes: comparativo 12 meses, estado de cuenta | M | Local: SQL; remoto: endpoints listos |
-| P3 | Exportación CSV | S | Local: FileProvider + share; BOM UTF-8 como backend |
-| P4 | Tarjetas de crédito | L | Leer ADR-012 y doc 12 del backend primero; modelo de saldo híbrido |
-| P5 | IA BYOK (chat, scan de facturas) | L | Requiere UI de settings de IA; API `ai/*` lista |
-| P6 | Sync offline-first local↔remoto | XL | Motor de sincronización (IDs, conflictos, cola de writes) — proyecto propio |
-| P7 | Widget de registro rápido | M | Widget Compose Glance |
-| P7 | Bloqueo biométrico | S | BiometricPrompt; pedir si hay demanda |
-| P8 | Modo multi-perfil local | M | Solo si usuarios reales lo piden |
+| **F8** | Reportes + CSV + estado de cuenta | S/M | `reports/*`; CSV con FileProvider/BOM UTF-8 |
+| **F9** | Gastos mixtos + comprobantes | M | `expense_items` ya existe; verificar multipart de recibos |
+| **F10** | Widgets + atajos + notificaciones | M | Glance W1–W4; canales de notificación |
+| **F11** | Recurrentes + metas de ahorro | L | `recurring-payments`, `savings-goals`; WorkManager |
+| **F12** | Tarjetas de crédito | L | Leer ADR-012 y doc 12 del backend |
+| **F13** | IA BYOK | L | `ai/*`; clave cifrada y confirmación humana |
+| **F14** | Backup/export/import + sync offline-first | M/XL | Backup primero; sync es proyecto propio |
+| Quick win | Atajos de app, share target, biométrico | S | Ver `11` |
+| Quick win | Frecuencia de tasas, dynamic color, tablets | S/M | Ver `11` |
+| Post-v1 | Multi-perfil local | M | Solo si usuarios reales lo piden |
 
 ## Deudas técnicas / verificaciones contra el backend
 

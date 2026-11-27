@@ -101,4 +101,6 @@ El bytecode target es Java 17 (compatible con CI y cualquier JDK 17+).
   micro-animaciones, pasada de accesibilidad, R8 + firma de release fuera del repo,
   README/CONTRIBUTING/CHANGELOG y evaluación F-Droid con metadata fastlane.
   Tag `v1.0.0` y GitHub Release publicados con APK firmado + checksum.
-- **Siguiente**: post-v1 — backlog priorizado en `docs/08-backlog-tareas.md`.
+- **Siguiente**: post-v1 — hoja de ruta y paridad en
+  [`docs/11-hoja-de-ruta-post-v1.md`](docs/11-hoja-de-ruta-post-v1.md); diseño de
+  widgets en [`docs/12-widgets.md`](docs/12-widgets.md) y tablero en `docs/08`.

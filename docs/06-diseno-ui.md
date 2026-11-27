@@ -105,6 +105,22 @@ mensual para categorías, tipo gasto/ingreso al crear). Borrar con gasto/ingreso
 - Apariencia (claro/oscuro/sistema), idioma (sistema/es/en), Acerca de (versión, licencia,
   repo).
 
+## Widgets (post-v1)
+
+Los widgets no forman parte de las pantallas Compose: son Glance y se documentan en
+[`12-widgets.md`](12-widgets.md). Resumen de producto:
+
+- **W1 Registro rápido** (2×1/4×1): + Gasto / + Ingreso → formulario.
+- **W2 Resumen del mes** (4×2): gastos, ingresos y neto.
+- **W3 Presupuesto** (2×2/4×2): barra global y restante.
+- **W4 Tasas** (2×1): BCV/paralelo y actualización.
+- **W5 Últimos movimientos** (4×2/4×4).
+- **W6 Categoría configurable** (2×2/4×2).
+- **W7 Metas/vencimientos** (4×2, tras F11).
+
+Principios: sin acciones destructivas desde el widget, opción “ocultar montos”,
+mismas reglas de dinero congelado y cero telemetría.
+
 ## Tema y identidad
 
 - Material 3, **esquema por defecto generado de una semilla verde** (finanzas) hasta que

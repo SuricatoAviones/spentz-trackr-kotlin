@@ -89,9 +89,9 @@ app/src/main/java/io/github/suricatoaviones/spentztrackr/
 │   └── util/                     # fechas, formato de montos por locale
 ├── domain/
 │   ├── model/                    # Expense, Income, Category, PaymentSource,
-│   │                             #   ExchangeRate, AppSettings (sin anotaciones de Android)
+│   │                             #   ExchangeRate, Dashboard, UserPreferences
 │   ├── service/                  # ConversionService, CommissionCalculator,
-│   │                             #   RatePolicy (tasa vigente para un día)
+│   │                             #   RatePolicy, DashboardAggregator
 │   └── repository/               # interfaces: ExpenseRepository, …
 ├── data/
 │   ├── settings/                 # DataStore: modo, URL, token, prefs de UI
@@ -101,16 +101,21 @@ app/src/main/java/io/github/suricatoaviones/spentztrackr/
 │   └── repository/                # implementaciones que delegan según modo
 ├── feature/
 │   ├── onboarding/               # bienvenida, elección de modo, login remoto, setup local
-│   ├── dashboard/
+│   ├── home/                     # dashboard, presupuesto, recientes
 │   ├── expenses/                 # lista, detalle, formulario
 │   ├── incomes/
 │   ├── catalog/                  # categorías y orígenes
 │   ├── rates/                    # tasas del día, override manual, histórico
-│   └── settings/                  # ajustes + cambio de modo
+│   ├── settings/                 # ajustes + cambio de modo
+│   └── widget/                   # post-v1: Glance (ver docs/12)
 └── di/                           # módulos Hilt
 app/src/test/                     # unit tests del dominio y viewmodels (JVM)
 app/src/androidTest/               # tests de Room y de UI Compose
 ```
+
+Los widgets son **post-v1** y no viven en la UI Compose normal: se implementan con
+Glance en `feature/widget/`, leen snapshots cacheados y nunca hacen red en
+`provideGlance`. Diseño y contratos en [`12-widgets.md`](12-widgets.md).
 
 ## Decisiones registradas (ADR de Android)
 

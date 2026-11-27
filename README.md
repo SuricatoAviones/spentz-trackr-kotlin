@@ -145,6 +145,23 @@ un emulador API 37; ver [`docs/screenshots/README.md`](docs/screenshots/README.m
 
 Detalle en [`docs/02-arquitectura.md`](docs/02-arquitectura.md).
 
+## Roadmap
+
+La v1.0.0 cubre el núcleo (gastos, ingresos, catálogos, tasas, dashboard y
+ajustes). La paridad con la app web está planificada en fases post-v1:
+
+- **F8** Reportes + CSV + estado de cuenta.
+- **F9** Gastos mixtos + comprobantes.
+- **F10** Widgets + atajos + notificaciones.
+- **F11** Recurrentes + metas de ahorro.
+- **F12** Tarjetas de crédito.
+- **F13** IA BYOK.
+- **F14** Backup/export/import + sync offline-first.
+
+Detalle de alcance, dependencias del backend y criterios de salida en
+[`docs/11-hoja-de-ruta-post-v1.md`](docs/11-hoja-de-ruta-post-v1.md); diseño de
+widgets en [`docs/12-widgets.md`](docs/12-widgets.md).
+
 ## Documentación
 
 | Documento | Descripción |
@@ -160,6 +177,8 @@ Detalle en [`docs/02-arquitectura.md`](docs/02-arquitectura.md).
 | [`docs/08-backlog-tareas.md`](docs/08-backlog-tareas.md) | Backlog de tareas detallado |
 | [`docs/09-entorno-y-herramientas.md`](docs/09-entorno-y-herramientas.md) | Android Studio / IntelliJ, emulador y convenciones |
 | [`docs/10-fdroid.md`](docs/10-fdroid.md) | Empaquetado, metadata y publicación en F-Droid |
+| [`docs/11-hoja-de-ruta-post-v1.md`](docs/11-hoja-de-ruta-post-v1.md) | Paridad con la web, fases post-v1 y criterios de salida |
+| [`docs/12-widgets.md`](docs/12-widgets.md) | Catálogo y diseño técnico de widgets Glance |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | Cómo contribuir: ramas, tests, estilo y PRs |
 | [`CHANGELOG.md`](CHANGELOG.md) | Historial de versiones (SemVer) |
 

@@ -198,15 +198,23 @@ comisión y tasa congelada — en ambos modos.
 
 ---
 
-## Post-v1 (resumen — detalle y priorización en `08`)
+## Post-v1
 
-1. Gastos mixtos (`expense_items`) y comprobantes (fotos + subida multipart — verificar
-   soporte en OpenAPI).
-2. Metas de ahorro con aportes; pagos recurrentes con `markPaid`.
-3. Reportes: comparativo 12 meses, estado de cuenta, exportación CSV (local via
-   FileProvider/share).
-4. Tarjetas de crédito (cortes, abonos, saldo híbrido — leer `12-tarjetas-de-credito.md`
-   del backend antes).
-5. IA BYOK (chat, escaneo de facturas) sobre `ai/*` de la API.
-6. Sincronización offline-first local↔remoto (motor de sync con Room como caché).
-7. Widgets, notificaciones de presupuesto, bloqueo biométrico.
+La hoja de ruta completa (matriz de paridad web ↔ Android, dependencias del
+backend, alcance, criterios de salida y decisiones abiertas) vive en
+[`11-hoja-de-ruta-post-v1.md`](11-hoja-de-ruta-post-v1.md). Los widgets tienen
+diseño propio en [`12-widgets.md`](12-widgets.md). Resumen:
+
+| Fase | Tema |
+|---|---|
+| F8 | Reportes, estado de cuenta y CSV |
+| F9 | Gastos mixtos y comprobantes |
+| F10 | Widgets, atajos y notificaciones |
+| F11 | Pagos recurrentes y metas de ahorro |
+| F12 | Tarjetas de crédito |
+| F13 | IA BYOK |
+| F14 | Backup/export/import y sync offline-first |
+| Quick wins | Atajos, share target, biométrico, dynamic color, tablets |
+
+Lo que es solo web (panel de administración, PWA, login 2FA/passkeys sin API)
+no se porta al cliente Android; se documenta en la matriz de `11`.
